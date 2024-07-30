@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --grid-border: 1px solid #9c9c9c;
+            --grid-bg: #333;
+
+            --grid-row-header-bg: #2a2a2a;
+            --grid-row-header-color: #777;
+
+            --grid-header-bg: #212223;
+            --grid-header-color: #c5c5c5;
+
+            --grid-weekday-row-color: #acacac;
+        }
+        body {
+            background-color: #212223; 
+            color: #c5c5c5;
+            padding: 0 1rem;
+
+        }
+
+        .noto-sans-tc-a1 {
+            font-family: "Noto Sans TC", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        div#grids-container {
+            padding: 1rem;
+        }
+        table.grid {
+            border: var(--grid-border);
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+            background-color: var(--grid-bg);
+
+            th, td {
+                border: var(--grid-border);
+                padding: 1rem;
+            }
+
+            tr {
+                th:first-child {
+                    /*transform: rotate(-90deg);*/
+                    padding: .5rem 1rem;
+                    max-width: 1rem;
+                    background-color: var(--grid-row-header-bg);
+                    color: var(--grid-row-header-color);
+                }
+
+                &.month-row {
+                   
+                    th:not(:first-child) {
+                        background-color: var(--grid-header-bg);
+                    }
+                }
+
+                &.weekday-row {
+                    th:not(:first-child) {
+                        color: var(--grid-weekday-row-color);
+                    }
+                }
+            }
+
+            .r-90 {
+                transform: rotate(90deg);
+            }
+            .r-180 {
+                transform: rotate(180deg);
+            }
+            .r-270 {
+                transform: rotate(270deg);
+            }
+
+            td.blank {
+                background-color:transparent;
+            }
+
+            td.recruitment {
+                background-color: #464646;
+            }
+            td.deploy {
+                background-color: #39396c;
+            }
+            
+            td.ui-1,td.ui-2,td.ui-3, td.dev-1, td.dev-2, td.dev-3, td.api, td.cloud-design {
+                color: #fff;
+            }
+            td.ui-1 {
+                background-color: rgb(45, 145, 212);
+            }
+            td.ui-2 {
+                background-color: rgb(236, 172, 51);
+            }
+            td.ui-3 {
+                background-color: rgb(192, 41, 172);
+            }
+
+            td.dev-1 {
+                background-color: rgb(14, 76, 112);
+            }
+            td.dev-2 {
+                background-color: rgb(163, 112, 17);
+            }
+            td.dev-3 {
+                background-color: rgb(155, 26, 101);
+            }
+
+            td.api {
+                background-color: #343e49;
+            }
+            td.course-update {
+                background-color: rgb(0, 95, 5);
+            }
+            td.cloud-design {
+                background-color: rgb(0, 160, 152);
+            }
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        $(function(){
+
+            const grids = [
+                 {
+                    dates: [
+                        {month:4, weekText: '4/22' },
+                        {month:5, weekText: '' },
+                        {month:6, weekText: '' },
+                        {month:7, weeks: [
+                            {starts: '7/1',ends:'7/5'},
+                            {starts: '7/8',ends:'7/12'},
+                            {starts: '7/15',ends:'7/19'},
+                            {starts: '7/22',ends:'7/26'},
+                            {starts: '7/29',ends:'8/2'},
+                        ] },
+                        {month:8, weeks: [
+                            {starts: '8/5',ends:'8/9'},
+                            {starts: '8/12',ends:'8/16'},
+                            {starts: '8/19',ends:'8/23'},
+                            {starts: '8/26',ends:'8/30'},
+                        ] },
+                        {month:9, weeks: [
+                            {starts: '9/2',ends:'9/6'},
+                            {starts: '9/9',ends:'9/13'},
+                            {starts: '9/16',ends:'9/20'},
+                        ] },
+                    ],
+                    items: [
+                        
+                    [
+                            {colspan: 15, className: 'api', title:'後端API開發/機制制定'},
+                        ],
+                        [
+
+                        {colspan: 5, className: 'ui-1', title:'UI設計 - 第一階段'},
+                            {colspan: 1, className: 'blank'},
+                            {colspan: 8, className: 'ui-2', title:'UI設計 - 第二階段'},
+                            // {colspan: 1, className: 'blank'},
+                        ],
+                        [
+                            {colspan: 4, className: 'recruitment', title:'前端招聘'},
+                            {colspan: 6, className: 'dev-1', title:'前端開發 - 第一階段'},
+                            {colspan: 2, className: 'dev-1', title:'第一階段 QC'},
+                            {colspan: 3, className: 'dev-2', title:'前端開發 - 第二階段'},
+                        ],
+                        [
+                            {colspan: 8, className: 'blank'},
+                            {colspan: 4, className: 'course-update', title:'資料轉換(修正平台轉換問題)'},
+                            // {colspan: 3, className: 'blank'},
+                        ],
+
+                    ]
+            },
+            {
+                dates:[
+                    {month:9, weeks:[
+                        {starts: '9/23',ends:'9/27'},
+                        {starts: '9/30',ends:'10/4'},
+                    ]},
+                    {month:10, weeks: [
+                        {starts: '10/7',ends:'10/11'},
+                        {starts: '10/14',ends:'10/18'},
+                        {starts: '10/21',ends:'10/25'},
+                        {starts: '10/28',ends:'11/1'},
+                    ]},
+                    {month:11, weeks: [
+                        {starts: '11/4',ends:'11/8'},
+                        {starts: '11/11',ends:'11/15'},
+                        {starts: '11/18',ends:'11/22'},
+                        {starts: '11/25',ends:'11/29'},
+                        
+                    ]},
+                    {month:12, weeks: [
+                        {starts: '12/2',ends:'12/6'},
+                        {starts: '12/9',ends:'12/13'},
+                        {starts: '12/16',ends:'12/20'},
+                        {starts: '12/23',ends:'12/27'},
+                        {starts: '12/30',ends:'1/3'},
+                    ]},
+                ],
+                items:[
+                    [
+                        {colspan: 8, className: 'ui-3', title:'UI設計 - 第三階段'},
+                        {colspan: 7, className: '', title:'設計合約保固維護(交付後三個月)'},
+                    ],
+                    [
+                        {colspan: 3, className: 'dev-2', title:'前端開發 - 第二階段'},
+                        {colspan: 2, className: 'dev-2', title:'第二階段 QC'},
+                        {colspan: 7, className: 'dev-3', title:'前端開發 - 第三階段'},
+                        {colspan: 2, className: 'dev-3', title:'第三階段 QC'},
+                        // {colspan: 1, className: 'blank'},
+                    ],
+                    [
+                    {colspan: 2, className: 'blank'},
+                    {colspan: 6, className: 'cloud-design', title:'雲端架構制定/廠商轉換'},
+                    {colspan: 3, className: 'cloud-design', title:'架構建置與測試'},
+                    {colspan: 3, className: 'deploy', title:'雲端部署'},
+                        // {colspan: 2, className: 'blank'},
+                    ],
+                ]
+            }
+        ];
+
+            const gridsContainer = $('#grids-container');
+            grids.forEach((grid, index) => {
+                const gridHtml = createGridHtml(grid);
+                gridsContainer.append(gridHtml);
+            });
+
+            function createGridHtml(grid){
+                const table = $('<table class="grid">');
+                const thead = $('<thead>');
+                    const monthRow = $('<tr class="month-row">');
+                    
+                    monthRow.append('<th>月份</th>');
+                    grid.dates.forEach(date => {
+                        // 根據 monthNumber 取出月份
+                        const monthDay = new Date(0, date.month-1);
+                        const shortMonth = monthDay.toLocaleString('en', { month: 'short' });
+                        // 建立月份的 th，如果有 weekText 則不設定 colspan，否則根據月份的週數設定 colspan
+                        if (typeof(date.weekText) !== 'undefined'){
+                            const monthTh = $('<th>' + shortMonth + '</th>');
+                            monthRow.append(monthTh);
+                        }else{
+                           const weekCountOfMonth = date.weeks.length;
+                           const monthTh = $('<th colspan="' + weekCountOfMonth + '">' + shortMonth + '</th>');
+                           monthRow.append(monthTh);
+                        }
+                        
+                        
+                    });
+                    thead.append(monthRow);
+                    const weekdayRow = $('<tr class="weekday-row">');
+                    weekdayRow.append('<th>日期</th>')
+                    grid.dates.forEach(date => {
+                        if (typeof(date.weekText) !== 'undefined'){
+                            const weekdayTh = $('<th >' + date.weekText + '</th>');
+                            weekdayRow.append(weekdayTh);
+                        }else{
+                            date.weeks.forEach(week => {
+                                const weekdayTh = $('<th >' + [week.starts, week.ends].join('<div>~</div>') + '</th>');
+                                if(week.colspan){
+                                    weekdayTh.attr('colspan', week.colspan);
+                                }
+                                weekdayRow.append(weekdayTh);
+                            });
+                        }   
+                    });
+                    thead.append(weekdayRow);
+                table.append(thead);
+
+                const tbody = $('<tbody>');
+                grid.items.forEach(row => {
+                    const tr = $('<tr>');
+                    tr.append($('<th>項目</th>'));
+                    row.forEach(cell => {
+                        const td = $(`<td>${cell.title??''}</td>`);
+                        if(cell.colspan > 1){
+                            td.attr('colspan', cell.colspan);
+                        }
+                        if(cell.className){
+                            td.addClass(cell.className);
+                        }
+  
+                        tr.append(td);
+                    });
+                    tbody.append(tr);
+                });
+                table.append(tbody);
+                
+                return table;
+            }
+        })
+    </script>
+</head>
+
+<body class="noto-sans-tc-a1">
+    <h1>SCHEDULE</h1>
+
+    <div id="grids-container"></div>
+   
+</body>
+</html>
