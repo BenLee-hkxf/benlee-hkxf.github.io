@@ -39,6 +39,7 @@
             padding: 1rem;
         }
         table.grid {
+            width: 100%;
             border: var(--grid-border);
             border-collapse: collapse;
             margin-bottom: 2rem;
@@ -158,7 +159,7 @@
                     ],
                     items: [
                         
-                        [
+                    [
                             {colspan: 15, className: 'api', title:'後端API開發/機制制定'},
                         ],
                         [
@@ -211,7 +212,7 @@
                 ],
                 items:[
                     [
-                            {colspan: 15, className: 'api', title:'後端API開發/機制制定'},
+                            {colspan: 10, className: 'api', title:'後端API開發/機制制定'},
                     ],
                     [
                         {colspan: 8, className: 'ui-3', title:'UI設計 - 第三階段'},
@@ -225,9 +226,10 @@
                         // {colspan: 1, className: 'blank'},
                     ],
                     [
-                    {colspan: 2, className: 'blank'},
                     {colspan: 6, className: 'cloud-design', title:'雲端架構制定/廠商轉換'},
                     {colspan: 3, className: 'cloud-design', title:'架構建置與測試'},
+                    {colspan: 3, className: 'blank'},
+
                     {colspan: 3, className: 'deploy', title:'雲端部署'},
                         // {colspan: 2, className: 'blank'},
                     ],
@@ -312,6 +314,6 @@
     <h1>SCHEDULE</h1>
 
     <div id="grids-container"></div>
-   
+    
 </body>
 </html>
