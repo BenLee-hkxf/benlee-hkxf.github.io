@@ -1,0 +1,216 @@
+[
+    {
+      "dates": [
+        {
+          "year": 2024,
+          "month": 4,
+          "weekText": "4/22"
+        },
+        {
+          "year": 2024,
+          "month": 5,
+          "weekText": ""
+        },
+        {
+          "year": 2024,
+          "month": 6,
+          "weekText": ""
+        },
+        {
+          "year": 2024,
+          "month": 7,
+          "weekIndexes": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        {
+          "year": 2024,
+          "month": 8,
+          "weekIndexes": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "year": 2024,
+          "month": 9,
+          "weekIndexes": [
+            0,
+            1,
+            2
+          ]
+        }
+      ],
+      "items": [
+        [
+          {
+            "colspan": 15,
+            "className": "api",
+            "title": "後端API開發/機制制定"
+          }
+        ],
+        [
+          {
+            "colspan": 5,
+            "className": "ui-1",
+            "title": "UI設計 - 第一階段"
+          },
+          {
+            "colspan": 1,
+            "className": "blank"
+          },
+          {
+            "colspan": 8,
+            "className": "ui-2",
+            "title": "UI設計 - 第二階段"
+          }
+        ],
+        [
+          {
+            "colspan": 4,
+            "className": "recruitment",
+            "title": "前端招聘"
+          },
+          {
+            "colspan": 6,
+            "className": "dev-1",
+            "title": "前端開發 - 第一階段"
+          },
+          {
+            "colspan": 2,
+            "className": "dev-1",
+            "title": "第一階段 QC"
+          },
+          {
+            "colspan": 3,
+            "className": "dev-2",
+            "title": "前端開發 - 第二階段"
+          }
+        ],
+        [
+          {
+            "colspan": 8,
+            "className": "blank"
+          },
+          {
+            "colspan": 4,
+            "className": "course-update",
+            "title": "資料轉換(修正平台轉換問題)"
+          }
+        ]
+      ]
+    },
+    {
+      "dates": [
+        {
+          "year": 2024,
+          "month": 9,
+          "weekIndexes": [
+            3,
+            4
+          ]
+        },
+        {
+          "year": 2024,
+          "month": 10,
+          "weekIndexes": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "year": 2024,
+          "month": 11,
+          "weekIndexes": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "year": 2024,
+          "month": 12,
+          "weekIndexes": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ]
+        }
+      ],
+      "items": [
+        [
+          {
+            "colspan": 10,
+            "className": "api",
+            "title": "後端API開發/機制制定"
+          }
+        ],
+        [
+          {
+            "colspan": 8,
+            "className": "ui-3",
+            "title": "UI設計 - 第三階段"
+          },
+          {
+            "colspan": 7,
+            "className": "",
+            "title": "設計合約保固維護(交付後三個月)"
+          }
+        ],
+        [
+          {
+            "colspan": 3,
+            "className": "dev-2",
+            "title": "前端開發 - 第二階段"
+          },
+          {
+            "colspan": 2,
+            "className": "dev-2",
+            "title": "第二階段 QC"
+          },
+          {
+            "colspan": 7,
+            "className": "dev-3",
+            "title": "前端開發 - 第三階段"
+          },
+          {
+            "colspan": 2,
+            "className": "dev-3",
+            "title": "第三階段 QC"
+          }
+        ],
+        [
+          {
+            "colspan": 6,
+            "className": "cloud-design",
+            "title": "雲端架構制定/廠商轉換"
+          },
+          {
+            "colspan": 3,
+            "className": "cloud-design",
+            "title": "架構建置與測試"
+          },
+          {
+            "colspan": 3,
+            "className": "blank"
+          },
+          {
+            "colspan": 3,
+            "className": "deploy",
+            "title": "雲端部署"
+          }
+        ]
+      ]
+    }
+  ]
