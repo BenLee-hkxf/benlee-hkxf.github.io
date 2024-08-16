@@ -43,7 +43,13 @@
                         ],
                         [
                             {colspan: 4, className: 'recruitment', title:'前端招聘'},
-                            {colspan: 6, className: 'dev-1', title:'前端開發 - 第一階段'},
+                            {colspan: 6, className: 'dev-1', title:'前端開發 - 第一階段', tasks: [
+                                { title: '首頁', description: 'main header、footer、categories、', tasks: [
+                                    {title: 'header'}, {title:'footer'},{title: 'menu'},{title: 'dialog'}
+                                ]},
+                                { title: '探索課程'},
+                                { title: '課程商品頁'},
+                            ]},
                             {colspan: 2, className: 'dev-1', title:'第一階段 QC'},
                             {colspan: 3, className: 'dev-2', title:'前端開發 - 第二階段'},
                         ],
@@ -58,7 +64,7 @@
                 {
                     dates:[
                         {year: 2024, month:9, weekIndexes:[3,4]},
-                        {year: 2024, month:10, weekIndexes:[0,1,2,3]},
+                        {year: 2024, month:10, weekIndexes:[0,1,2,3,4]},
                         {year: 2024, month:11, weekIndexes:[0,1,2,3]},
                         {year: 2024, month:12, weekIndexes:[0,1,2,3,4]},
                     ],
