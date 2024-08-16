@@ -60,6 +60,28 @@ table.grid {
                 color: var(--grid-weekday-row-color);
             }
         }
+
+    }
+
+    tr {
+        td {
+            .task {
+                border: 1px solid red;
+
+                .task-list {
+                    overflow: hidden;
+                    max-height: 0;
+                }
+                &.expended {
+
+
+                    .task-list {
+                        max-height: 1000px;
+                        transition: max-height 800ms ease;
+                    }
+                }
+            }
+        }
     }
 
     .r-90 {

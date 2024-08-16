@@ -91,7 +91,20 @@ function createGridHtml(grid){
 
         let cellStep = 0;
         row.forEach((cell,i) => {
-            const td = $(`<td>${cell.title??''}</td>`);
+            const td = $(`<td></td>`);
+            const taskBlock = $('<div class="task flex items-center">').text(cell.title);
+            if (cell.tasks){
+                const icon = $('<span class="collapsible material-symbols-outlined">expand_circle_down</span>');
+                taskBlock.on('click', function(){
+                    $(this).toggleClass('expended');//.css('transform', 'rotate(45deg)');
+                });
+
+                taskBlock.prepend(icon);
+                // <span class="material-symbols-outlined">add_circle</span>
+                // taskBlock.addClass('collapsible');
+                taskBlock.append($('<div class="task-list">').append(cell.tasks.map(task => $('<div>').text(task.title))));
+            }
+            td.append(taskBlock);
             let colspan = +cell.colspan;
 
             colWeeks.forEach(colWeek => {
