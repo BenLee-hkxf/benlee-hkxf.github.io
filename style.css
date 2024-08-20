@@ -27,7 +27,7 @@ body {
 div#grids-container {
     padding: 1rem;
 }
-table.grid {
+table.data-grid {
     width: 100%;
     border: var(--grid-border);
     border-collapse: collapse;
@@ -66,18 +66,37 @@ table.grid {
     tr {
         td {
             .task {
-                border: 1px solid red;
+                height: 100%;
+                // border: 1px solid red;
+                .collapsible {
+                    margin-right: 0.5rem;
+                    transition: 300ms transform ease-in-out;
+                    transform: rotate(-90deg);
+                }
+
+                .collapsible + span.title {
+                    cursor: pointer;
+                }
 
                 .task-list {
                     overflow: hidden;
                     max-height: 0;
-                }
-                &.expended {
+                    padding: 0 1rem;
+                    transition: max-height 300ms ease, padding 300ms ease;
 
+                    display: flex;
+                    gap: 0.5rem;
+                    flex-wrap: wrap;
+                }
+
+                &.expended {
+                    .collapsible {
+                        transform: rotate(0deg);
+                    }
 
                     .task-list {
                         max-height: 1000px;
-                        transition: max-height 800ms ease;
+                        padding: 1rem;
                     }
                 }
             }

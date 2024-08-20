@@ -2,7 +2,7 @@
 
 
 function createGridHtml(grid){
-    const table = $('<table class="grid">');
+    const table = $('<table class="data-grid">');
     const thead = $('<thead>');
         const monthRow = $('<tr class="month-row">');
         
@@ -92,7 +92,8 @@ function createGridHtml(grid){
         let cellStep = 0;
         row.forEach((cell,i) => {
             const td = $(`<td></td>`);
-            const taskBlock = $('<div class="task flex items-center">').text(cell.title);
+            const taskBlock = $('<div class="task flex items-center">');
+            taskBlock.append($('<span class="title"></span>').text(cell.title));
             if (cell.tasks){
                 const icon = $('<span class="collapsible material-symbols-outlined">expand_circle_down</span>');
                 taskBlock.on('click', function(){
