@@ -113,7 +113,23 @@ table.data-grid {
                     flex-wrap: wrap; */
                     opacity: 0;
                     font-weight: 200;
-                    padding-left: 2rem;
+                    padding-left: 1rem;
+
+                    &>div {
+                        cursor: default;
+                        border-radius: 00.5rem;
+                        padding: 0.2rem 1rem;
+                        opacity: 0.75;
+
+                        transition-property: background-color, opacity;
+                        transition-duration: 100ms;
+                        transition-timing-function: ease-in-out;
+                        
+                        &:hover {
+                            background-color: #444;
+                            opacity: 1;
+                        }
+                    }
                 }
 
                 &.expended {

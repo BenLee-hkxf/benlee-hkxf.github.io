@@ -43,7 +43,7 @@
             "title": "前端開發 - 第一階段",
             "tasks": [
               {
-                "title": "前端技術架構 VUE/NUXT",
+                "title": "前端技術架構 VUE",
                 "description": "main header、footer、categories、",
                 "tasks": [
                   {"title": "主頁"},
@@ -52,6 +52,7 @@
                 ]
               },
               {"title": "基本路由實現/多國語系"},
+              {"title":"NUXT SSR"},
               {"title": "UI設計實現"}
             ]
           },
@@ -63,9 +64,10 @@
             {"colspan": 2, "className": "blank","title": "8/9 時程異動"},
             {"colspan": 6, "className": "dev-2", "title": "前端開發 - 第二階段", "tasks": [
                 {"title": "會員機制/社群登入"},
-                {"title": "購物車/優惠券"},
                 {"title": "第三方金流/財務串接"  },
-                {"title": "會員看課功能: 影像串接"}
+                {"title": "購物車/優惠券"},
+                {"title": "會員看課功能: 影像串接"},
+                {"title": "錯誤處理、流程完整性"}
             ]}
         ],
         [
@@ -110,8 +112,8 @@
           {"colspan": 7, "className": "dev-3", "title": "前端開發 - 第三階段", "tasks": [
               {"title": "功能補齊"},
               {"title": "系統後台"},
-              {"title": "行銷"  },
-              {"title": "社群"}
+              {"title": "行銷增強"  },
+              {"title": "社群增強"}
           ]},
           {"colspan": 2, "className": "dev-3", "title": "第三階段 QC"    }
         ],
