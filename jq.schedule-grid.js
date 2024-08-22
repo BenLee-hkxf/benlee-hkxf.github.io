@@ -92,18 +92,23 @@ function createGridHtml(grid){
         let cellStep = 0;
         row.forEach((cell,i) => {
             const td = $(`<td></td>`);
-            const taskBlock = $('<div class="task flex items-center">');
-            taskBlock.append($('<span class="title"></span>').text(cell.title));
+            const taskBlock = $('<div class="task">');
+            const titleRow = $('<div class="title-row  flex items-center">').appendTo(taskBlock);
+            const title = $('<span class="title"></span>').text(cell.title).appendTo(titleRow);
+            if (cell.tooltip){
+                td.attr('title', cell.tooltip);
+            }
+
             if (cell.tasks){
-                const icon = $('<span class="collapsible material-symbols-outlined">expand_circle_down</span>');
-                taskBlock.on('click', function(){
-                    $(this).toggleClass('expended');//.css('transform', 'rotate(45deg)');
+                const icon = $('<span class="collapsible material-symbols-outlined">expand_circle_down</span>').prependTo(titleRow);
+                titleRow.on('click', function(){
+                    taskBlock.toggleClass('expended');//.css('transform', 'rotate(45deg)');
                 });
 
-                taskBlock.prepend(icon);
                 // <span class="material-symbols-outlined">add_circle</span>
                 // taskBlock.addClass('collapsible');
-                taskBlock.append($('<div class="task-list">').append(cell.tasks.map(task => $('<div>').text(task.title))));
+                const taskList = $('<div class="task-list">').appendTo(taskBlock);
+                cell.tasks.map(task => $('<div>').text(task.title).appendTo(taskList));
             }
             td.append(taskBlock);
             let colspan = +cell.colspan;
@@ -145,6 +150,8 @@ function getWeekRange(year,month, weekIndex){
     let workDayEnd = new Date(workDayStart);
     workDayEnd.setDate(workDayEnd.getDate() + 4);
     
+
+    // 有 bug，跨月的第一週的 colspan 會強制 +1，但其實強制+1應該寫在前一個月的最後一週
     return {
         starts: [workDayStart.getMonth()+1, workDayStart.getDate()].join('/'),
         ends: [workDayEnd.getMonth()+1, workDayEnd.getDate()].join('/'),

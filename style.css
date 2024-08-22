@@ -15,6 +15,8 @@ body {
     color: #c5c5c5;
     padding: 0 1rem;
 
+    color-scheme: dark;
+
 }
 
 .noto-sans-tc-a1 {
@@ -36,14 +38,24 @@ table.data-grid {
 
     th, td {
         border: var(--grid-border);
+        
+    }
+
+    th {
         padding: 1rem;
+    }
+
+    td {
+        .task {
+            margin: 0.5rem;
+        }
     }
 
     tr {
         th:first-child {
             /*transform: rotate(-90deg);*/
             padding: .5rem 1rem;
-            max-width: 1rem;
+            max-width: 3rem;
             background-color: var(--grid-row-header-bg);
             color: var(--grid-row-header-color);
         }
@@ -66,11 +78,15 @@ table.data-grid {
     tr {
         td {
             .task {
+                
+               
                 height: 100%;
+                padding: 1rem;
                 // border: 1px solid red;
+
                 .collapsible {
                     margin-right: 0.5rem;
-                    transition: 300ms transform ease-in-out;
+                    transition: 200ms transform ease-in-out;
                     transform: rotate(-90deg);
                 }
 
@@ -78,15 +94,26 @@ table.data-grid {
                     cursor: pointer;
                 }
 
+                .title-row {
+                    user-select: none;
+                }
+
                 .task-list {
                     overflow: hidden;
                     max-height: 0;
                     padding: 0 1rem;
-                    transition: max-height 300ms ease, padding 300ms ease;
+                    
 
-                    display: flex;
+                    transition-duration: 200ms;
+                    transition-timing-function: ease-in-out;
+                    transition-property: max-height, opacity;
+
+                    /* display: flex;
                     gap: 0.5rem;
-                    flex-wrap: wrap;
+                    flex-wrap: wrap; */
+                    opacity: 0;
+                    font-weight: 200;
+                    padding-left: 2rem;
                 }
 
                 &.expended {
@@ -96,7 +123,9 @@ table.data-grid {
 
                     .task-list {
                         max-height: 1000px;
-                        padding: 1rem;
+                        opacity: 1;
+
+                        // padding: 1rem;
                     }
                 }
             }
@@ -127,6 +156,15 @@ table.data-grid {
     td.ui-1,td.ui-2,td.ui-3, td.dev-1, td.dev-2, td.dev-3, td.api, td.cloud-design {
         color: #fff;
     }
+
+    td.not-sure {
+        
+        opacity: 0.5;
+        .task {
+            border: 3px dotted #ccc;
+        }
+    }
+
     td.ui-1 {
         background-color: rgb(45, 145, 212);
     }
@@ -156,4 +194,14 @@ table.data-grid {
     td.cloud-design {
         background-color: rgb(0, 160, 152);
     }
+
+    
+    td:has(.task) {
+        opacity: 0.75;
+        transition: 100ms opacity ease-in-out;
+        &:hover {
+            opacity: 1;
+        }
+    }
+
 }

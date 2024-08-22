@@ -9,6 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
     <style>
         .material-symbols-outlined {
           font-variation-settings:
@@ -17,7 +19,24 @@
           'GRAD' 0,
           'opsz' 24
         }
+        .archivo-black-regular {
+            font-family: "Archivo Black", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+        .header-row {
+            h1 {
+                font-size: 3rem;
 
+            }
+        }
+
+        #version-selection {
+            padding: 1rem;
+            option {
+                padding: 1rem;
+            }
+        }
         
         /* .task {
             .collapsible {
@@ -32,6 +51,7 @@
                 }
             }
         } */
+
     </style>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -41,97 +61,148 @@
         // 單欄 weekText，直接指定顯示文字
         // 多欄 weekNumbers: 指定月份的周次，這樣可以讓月份的周次可以自動計算，不用手動調整
 
+        
+        const grids = [
+            {
+                dates: [
+                    {year: 2024, month:4, weekText: '4/22' },
+                    {year: 2024, month:5, weekText: '' },
+                    {year: 2024, month:6, weekText: '' },
+                    {year: 2024, month:7, weekIndexes:[0,1,2,3,4]},
+                    {year: 2024, month:8, weekIndexes:[0,1,2,3,4]},
+                    {year: 2024, month:9, weekIndexes:[0,1,2]},
+                ],
+                items: [
+                    
+                [
+                        {colspan: 15, className: 'api', title:'後端API開發/機制制定'},
+                    ],
+                    [
+
+                    {colspan: 5, className: 'ui-1', title:'UI設計 - 第一階段'},
+                        {colspan: 1, className: 'blank'},
+                        {colspan: 8, className: 'ui-2', title:'UI設計 - 第二階段'},
+                        // {colspan: 1, className: 'blank'},
+                    ],
+                    [
+                        {colspan: 4, className: 'recruitment', title:'前端招聘'},
+                        {colspan: 6, className: 'dev-1', title:'前端開發 - 第一階段', tasks: [
+                            { title: '首頁', description: 'main header、footer、categories、', tasks: [
+                                {title: 'header'}, {title:'footer'},{title: 'menu'},{title: 'dialog'}
+                            ]},
+                            { title: '探索課程'},
+                            { title: '課程商品頁'},
+                        ]},
+                        {colspan: 2, className: 'dev-1', title:'第一階段 QC'},
+                        {colspan: 3, className: 'dev-2', title:'前端開發 - 第二階段'},
+                    ],
+                    [
+                        {colspan: 8, className: 'blank'},
+                        {colspan: 4, className: 'course-update', title:'資料轉換(修正平台轉換問題)'},
+                        // {colspan: 3, className: 'blank'},
+                    ],
+
+                ]
+            },
+            {
+                dates:[
+                    {year: 2024, month:9, weekIndexes:[3,4]},
+                    {year: 2024, month:10, weekIndexes:[0,1,2,3,4]},
+                    {year: 2024, month:11, weekIndexes:[0,1,2,3]},
+                    {year: 2024, month:12, weekIndexes:[0,1,2,3,4]},
+                ],
+                items:[
+                    [
+                            {colspan: 10, className: 'api', title:'後端API開發/機制制定'},
+                    ],
+                    [
+                        {colspan: 8, className: 'ui-3', title:'UI設計 - 第三階段'},
+                        {colspan: 7, className: '', title:'設計合約保固維護(交付後三個月)'},
+                    ],
+                    [
+                        {colspan: 3, className: 'dev-2', title:'前端開發 - 第二階段'},
+                        {colspan: 2, className: 'dev-2', title:'第二階段 QC'},
+                        {colspan: 7, className: 'dev-3', title:'前端開發 - 第三階段'},
+                        {colspan: 2, className: 'dev-3', title:'第三階段 QC'},
+                        // {colspan: 1, className: 'blank'},
+                    ],
+                    [
+                    {colspan: 6, className: 'cloud-design', title:'雲端架構制定/廠商轉換'},
+                    {colspan: 3, className: 'cloud-design', title:'架構建置與測試'},
+                    {colspan: 3, className: 'blank'},
+
+                    {colspan: 3, className: 'deploy', title:'雲端部署'},
+                        // {colspan: 2, className: 'blank'},
+                    ],
+                ]
+            }
+        ];
+
+        function init(){
+
+
+        }
 
         $(function(){
 
+            const versionElement = $('#version-selection');
 
-            const grids = [
-                {
-                    dates: [
-                        {year: 2024, month:4, weekText: '4/22' },
-                        {year: 2024, month:5, weekText: '' },
-                        {year: 2024, month:6, weekText: '' },
-                        {year: 2024, month:7, weekIndexes:[0,1,2,3,4]},
-                        {year: 2024, month:8, weekIndexes:[0,1,2,3,4]},
-                        {year: 2024, month:9, weekIndexes:[0,1,2]},
-                    ],
-                    items: [
-                        
-                    [
-                            {colspan: 15, className: 'api', title:'後端API開發/機制制定'},
-                        ],
-                        [
+            function loadVersion(version){
+                $('#grids-container').empty();
 
-                        {colspan: 5, className: 'ui-1', title:'UI設計 - 第一階段'},
-                            {colspan: 1, className: 'blank'},
-                            {colspan: 8, className: 'ui-2', title:'UI設計 - 第二階段'},
-                            // {colspan: 1, className: 'blank'},
-                        ],
-                        [
-                            {colspan: 4, className: 'recruitment', title:'前端招聘'},
-                            {colspan: 6, className: 'dev-1', title:'前端開發 - 第一階段', tasks: [
-                                { title: '首頁', description: 'main header、footer、categories、', tasks: [
-                                    {title: 'header'}, {title:'footer'},{title: 'menu'},{title: 'dialog'}
-                                ]},
-                                { title: '探索課程'},
-                                { title: '課程商品頁'},
-                            ]},
-                            {colspan: 2, className: 'dev-1', title:'第一階段 QC'},
-                            {colspan: 3, className: 'dev-2', title:'前端開發 - 第二階段'},
-                        ],
-                        [
-                            {colspan: 8, className: 'blank'},
-                            {colspan: 4, className: 'course-update', title:'資料轉換(修正平台轉換問題)'},
-                            // {colspan: 3, className: 'blank'},
-                        ],
+                $.getJSON(`data/plan-${version}.json`, function(grids){
+                    grids.forEach((grid, index) => {
+                        const gridHtml = createGridHtml(grid);
+                        $('#grids-container').append(gridHtml);
+                    });
+                });
+            }
 
-                    ]
-                },
-                {
-                    dates:[
-                        {year: 2024, month:9, weekIndexes:[3,4]},
-                        {year: 2024, month:10, weekIndexes:[0,1,2,3,4]},
-                        {year: 2024, month:11, weekIndexes:[0,1,2,3]},
-                        {year: 2024, month:12, weekIndexes:[0,1,2,3,4]},
-                    ],
-                    items:[
-                        [
-                                {colspan: 10, className: 'api', title:'後端API開發/機制制定'},
-                        ],
-                        [
-                            {colspan: 8, className: 'ui-3', title:'UI設計 - 第三階段'},
-                            {colspan: 7, className: '', title:'設計合約保固維護(交付後三個月)'},
-                        ],
-                        [
-                            {colspan: 3, className: 'dev-2', title:'前端開發 - 第二階段'},
-                            {colspan: 2, className: 'dev-2', title:'第二階段 QC'},
-                            {colspan: 7, className: 'dev-3', title:'前端開發 - 第三階段'},
-                            {colspan: 2, className: 'dev-3', title:'第三階段 QC'},
-                            // {colspan: 1, className: 'blank'},
-                        ],
-                        [
-                        {colspan: 6, className: 'cloud-design', title:'雲端架構制定/廠商轉換'},
-                        {colspan: 3, className: 'cloud-design', title:'架構建置與測試'},
-                        {colspan: 3, className: 'blank'},
-
-                        {colspan: 3, className: 'deploy', title:'雲端部署'},
-                            // {colspan: 2, className: 'blank'},
-                        ],
-                    ]
-                }
-            ];
-
-            grids.forEach((grid, index) => {
-                const gridHtml = createGridHtml(grid);
-                $('#grids-container').append(gridHtml);
+            versionElement.on('change', function(){
+                const version = versionElement.val();
+                console.log('load version', version);
+                
+                loadVersion(version);
             });
 
+            $('input[type=radio][name=version]').change(function() {
+                const version = this.value;
+                loadVersion(version);
+            });
+
+            function checkVersion(){
+                const version = $('input[type=radio][name=version]:checked').val();
+                loadVersion(version);
+            }
+            checkVersion();
         });
     </script>
 </head>
 
 <body class="noto-sans-tc-a1">
-    <h1>SCHEDULE</h1>
+    <div class="header-row w-100 flex justify-between">
+        <h1 class="archivo-black-regular ">SCHEDULE</h1>
+        <div class="p-2">
+            <div>
+                <label>
+                    <input type="radio" name="version" id="version-1" value="a">
+                    version 1 - 2024 年底上架
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="radio" name="version" id="version-2" value="b" checked>
+                    version 2 - 2024 十一月初上架
+                </label>
+            </div>
+                        
+            <select id="version-selection" class="" hidden>
+                <option value="a">version 1 - 2024 年底上架</option>
+                <option value="b">version 2 - 2024 十一月初上架</option>
+            </select>
+        </div>
+        
+    </div>
 
     <div id="grids-container"></div>
     
