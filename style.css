@@ -13,7 +13,7 @@
 body {
     background-color: #212223; 
     color: #c5c5c5;
-    padding: 0 1rem;
+    padding: 0 ;
 
     color-scheme: dark;
 
@@ -27,7 +27,7 @@ body {
 }
 
 div#grids-container {
-    padding: 1rem;
+    padding: 2rem;
 }
 table.data-grid {
     width: 100%;
@@ -86,7 +86,11 @@ table.data-grid {
 
                 .collapsible {
                     margin-right: 0.5rem;
-                    transition: 200ms transform ease-in-out;
+                    color: inherit;
+                    transition-duration: 200ms;
+                    transition-timing-function: ease-in-out;
+                    transition-property: transform, color;
+
                     transform: rotate(-90deg);
                 }
 
@@ -119,7 +123,6 @@ table.data-grid {
                         cursor: default;
                         border-radius: 00.5rem;
                         padding: 0.2rem 1rem;
-                        opacity: 0.75;
 
                         transition-property: background-color, opacity;
                         transition-duration: 100ms;
@@ -127,14 +130,15 @@ table.data-grid {
                         
                         &:hover {
                             background-color: #444;
-                            opacity: 1;
+
                         }
                     }
                 }
 
-                &.expended {
+                &.expanded {
                     .collapsible {
                         transform: rotate(0deg);
+                        color: #e1f917;
                     }
 
                     .task-list {

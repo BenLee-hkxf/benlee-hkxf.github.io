@@ -25,6 +25,13 @@
             font-style: normal;
         }
         .header-row {
+            width: 100%;
+            position:sticky;
+            top: 0;
+            z-index: 1;
+            padding: 1rem;
+            background-color: #222;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
             h1 {
                 font-size: 3rem;
 
@@ -44,7 +51,7 @@
                 transform: rotate(-90deg);
             }
 
-            &.expended {
+            &.expanded {
                 .collapsible {
                     
                     transform: rotate(0deg);
@@ -175,6 +182,12 @@
                 loadVersion(version);
             }
             checkVersion();
+
+            $('#btn-toggle').on('click', function(){
+                // toggle all expanded
+                const firstState = $($('.task').get(0)).hasClass('expanded');
+                $('.task').toggleClass('expanded', !firstState);
+            });
         });
     </script>
 </head>
@@ -182,6 +195,9 @@
 <body class="noto-sans-tc-a1">
     <div class="header-row w-100 flex justify-between">
         <h1 class="archivo-black-regular ">SCHEDULE</h1>
+        <div class="p-2 flex items-center">
+            <button id="btn-toggle">toggle</button>
+        </div>
         <div class="p-2">
             <div>
                 <label>

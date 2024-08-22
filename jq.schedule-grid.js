@@ -102,7 +102,7 @@ function createGridHtml(grid){
             if (cell.tasks){
                 const icon = $('<span class="collapsible material-symbols-outlined">expand_circle_down</span>').prependTo(titleRow);
                 titleRow.on('click', function(){
-                    taskBlock.toggleClass('expended');//.css('transform', 'rotate(45deg)');
+                    taskBlock.toggleClass('expanded');//.css('transform', 'rotate(45deg)');
                 });
 
                 // <span class="material-symbols-outlined">add_circle</span>
