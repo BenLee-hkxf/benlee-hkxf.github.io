@@ -121,6 +121,7 @@ table.data-grid {
 
                     &>div {
                         cursor: default;
+                        user-select: none;
                         border-radius: 00.5rem;
                         padding: 0.2rem 1rem;
 

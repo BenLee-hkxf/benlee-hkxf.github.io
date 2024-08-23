@@ -26,9 +26,7 @@
         }
         .header-row {
             width: 100%;
-            position:sticky;
-            top: 0;
-            z-index: 1;
+            
             padding: 1rem;
             background-color: #222;
             box-shadow: 0 0 10px rgba(0,0,0,0.5);
@@ -63,6 +61,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="jq.schedule-grid.js"></script>
+    <script src="jq.drag-scroll.js"></script>
     <script>
         // 月份的周次有3種模式:
         // 單欄 weekText，直接指定顯示文字
@@ -192,13 +191,14 @@
     </script>
 </head>
 
-<body class="noto-sans-tc-a1">
-    <div class="header-row w-100 flex justify-between">
+<body class="noto-sans-tc-a1 pt-28">
+    <div class="p-2 flex items-center fixed z-10 right-[1rem] bottom-[1rem] bg-slate-100 opacity-50 hover:opacity-100 transition-opacity">
+        <button id="btn-toggle">toggle</button>
+    </div>
+    <div class="header-row fixed top-0 left-0 z-10 w-100 flex flex-wrap sm:flex-nowrap justify-between ">
         <h1 class="archivo-black-regular ">SCHEDULE</h1>
-        <div class="p-2 flex items-center">
-            <button id="btn-toggle">toggle</button>
-        </div>
-        <div class="p-2">
+
+        <div class="p-2 whitespace-nowrap">
             <div>
                 <label>
                     <input type="radio" name="version" id="version-1" value="a">
