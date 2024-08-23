@@ -2,9 +2,24 @@
 
 
 function createGridHtml(grid){
-    const table = $('<table class="data-grid">');
-    const thead = $('<thead>');
-        const monthRow = $('<tr class="month-row">');
+    const wrapper = $('<div class="grid-wrapper">');
+    const gridCollapsed = $('<div class="grid-collapsed-row flex gap-1 items-center">').appendTo(wrapper);
+    const container = $('<div class="grid-container">').appendTo(wrapper);
+
+    const toggler = $('<span class="collapse-toggler cursor-pointer material-symbols-outlined"></span>').appendTo(gridCollapsed);
+    toggler.text('expand_circle_down');
+    gridCollapsed.on('click', function(){
+        wrapper.toggleClass('collapsed');
+    });
+
+    const collapsedText = $('<div class="collapsed-text"></div>').text(grid.collapsedText?grid.collapsedText:'...').appendTo(gridCollapsed);
+
+    // table.toggleClass('collapsed', grid.collapsed);
+    if (grid.collapsed) { wrapper.addClass('collapsed');}
+    
+    const table = $('<table class="data-grid">').appendTo(container);
+    const thead = $('<thead>').appendTo(table);
+        const monthRow = $('<tr class="month-row">').appendTo(thead);
         
         monthRow.append('<th>月份</th>');
         grid.dates.forEach(date => {
@@ -13,7 +28,7 @@ function createGridHtml(grid){
             const shortMonth = monthDay.toLocaleString('en', { month: 'short' });
             // 建立月份的 th，如果有 weekText 則不設定 colspan，否則根據月份的週數設定 colspan
 
-            const monthTh = $('<th>' + shortMonth + '</th>');
+            const monthTh = $('<th>' + shortMonth + '</th>').appendTo(monthRow);
 
             let weekCountOfMonth = 0;
             if (typeof(date.weekText) !== 'undefined'){
@@ -32,13 +47,11 @@ function createGridHtml(grid){
 
             monthTh.attr('colspan', weekCountOfMonth);
             
-            monthRow.append(monthTh);
-            
+
         });
-        thead.append(monthRow);
 
 
-        const weekdayRow = $('<tr class="weekday-row">');
+        const weekdayRow = $('<tr class="weekday-row">').appendTo(thead);
         weekdayRow.append('<th>日期</th>')
 
         let lastWeek = {};
@@ -47,8 +60,7 @@ function createGridHtml(grid){
 
         grid.dates.forEach((date,di) => {
             if (typeof(date.weekText) !== 'undefined'){
-                const weekdayTh = $('<th >' + date.weekText + '</th>');
-                weekdayRow.append(weekdayTh);
+                const weekdayTh = $('<th >' + date.weekText + '</th>').appendTo(weekdayRow);
                 weekCount++;
             }else{
 
@@ -63,11 +75,11 @@ function createGridHtml(grid){
                     }
                     weekCount++;
 
-                    const weekdayTh = $(`<th>` + [week.starts, week.ends].join('<div>~</div>') + '</th>');
+                    const weekdayTh = $(`<th>` + [week.starts, week.ends].join('<div>~</div>') + '</th>').appendTo(weekdayRow);
                     if(week.isCrossMonth){
                         weekdayTh.attr('colspan', 2);
                     }
-                    weekdayRow.append(weekdayTh);
+
                 });
 
                 // date.weeks.forEach(week => {
@@ -79,20 +91,17 @@ function createGridHtml(grid){
                 // });
             }   
         });
-        thead.append(weekdayRow);
 
 
-    table.append(thead);
-
-    const tbody = $('<tbody>');
+    const tbody = $('<tbody>').appendTo(table);
     grid.items.forEach(row => {
-        const tr = $('<tr>');
+        const tr = $('<tr>').appendTo(tbody);
         tr.append($('<th>項目</th>'));
 
         let cellStep = 0;
         row.forEach((cell,i) => {
-            const td = $(`<td></td>`);
-            const taskBlock = $('<div class="task">');
+            const td = $(`<td></td>`).appendTo(tr);
+            const taskBlock = $('<div class="task">').appendTo(td);
             const titleRow = $('<div class="title-row  flex items-center">').appendTo(taskBlock);
             const title = $('<span class="title"></span>').text(cell.title).appendTo(titleRow);
             if (cell.tooltip){
@@ -110,7 +119,7 @@ function createGridHtml(grid){
                 const taskList = $('<div class="task-list">').appendTo(taskBlock);
                 cell.tasks.map(task => $('<div>').text(task.title).addClass(task.state).appendTo(taskList));
             }
-            td.append(taskBlock);
+            
             let colspan = +cell.colspan;
 
             colWeeks.forEach(colWeek => {
@@ -126,14 +135,14 @@ function createGridHtml(grid){
                 td.addClass(cell.className);
             }
 
-            tr.append(td);
+
             cellStep += colspan || 1;
         });
-        tbody.append(tr);
+        
     });
-    table.append(tbody);
+
     
-    return table;
+    return wrapper;
 }
 
 // 行政院人事行政總處訂定每年行政機關辦公日曆表

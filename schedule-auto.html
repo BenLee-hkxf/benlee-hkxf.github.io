@@ -67,88 +67,6 @@
         // 單欄 weekText，直接指定顯示文字
         // 多欄 weekNumbers: 指定月份的周次，這樣可以讓月份的周次可以自動計算，不用手動調整
 
-        
-        const grids = [
-            {
-                dates: [
-                    {year: 2024, month:4, weekText: '4/22' },
-                    {year: 2024, month:5, weekText: '' },
-                    {year: 2024, month:6, weekText: '' },
-                    {year: 2024, month:7, weekIndexes:[0,1,2,3,4]},
-                    {year: 2024, month:8, weekIndexes:[0,1,2,3,4]},
-                    {year: 2024, month:9, weekIndexes:[0,1,2]},
-                ],
-                items: [
-                    
-                [
-                        {colspan: 15, className: 'api', title:'後端API開發/機制制定'},
-                    ],
-                    [
-
-                    {colspan: 5, className: 'ui-1', title:'UI設計 - 第一階段'},
-                        {colspan: 1, className: 'blank'},
-                        {colspan: 8, className: 'ui-2', title:'UI設計 - 第二階段'},
-                        // {colspan: 1, className: 'blank'},
-                    ],
-                    [
-                        {colspan: 4, className: 'recruitment', title:'前端招聘'},
-                        {colspan: 6, className: 'dev-1', title:'前端開發 - 第一階段', tasks: [
-                            { title: '首頁', description: 'main header、footer、categories、', tasks: [
-                                {title: 'header'}, {title:'footer'},{title: 'menu'},{title: 'dialog'}
-                            ]},
-                            { title: '探索課程'},
-                            { title: '課程商品頁'},
-                        ]},
-                        {colspan: 2, className: 'dev-1', title:'第一階段 QC'},
-                        {colspan: 3, className: 'dev-2', title:'前端開發 - 第二階段'},
-                    ],
-                    [
-                        {colspan: 8, className: 'blank'},
-                        {colspan: 4, className: 'course-update', title:'資料轉換(修正平台轉換問題)'},
-                        // {colspan: 3, className: 'blank'},
-                    ],
-
-                ]
-            },
-            {
-                dates:[
-                    {year: 2024, month:9, weekIndexes:[3,4]},
-                    {year: 2024, month:10, weekIndexes:[0,1,2,3,4]},
-                    {year: 2024, month:11, weekIndexes:[0,1,2,3]},
-                    {year: 2024, month:12, weekIndexes:[0,1,2,3,4]},
-                ],
-                items:[
-                    [
-                            {colspan: 10, className: 'api', title:'後端API開發/機制制定'},
-                    ],
-                    [
-                        {colspan: 8, className: 'ui-3', title:'UI設計 - 第三階段'},
-                        {colspan: 7, className: '', title:'設計合約保固維護(交付後三個月)'},
-                    ],
-                    [
-                        {colspan: 3, className: 'dev-2', title:'前端開發 - 第二階段'},
-                        {colspan: 2, className: 'dev-2', title:'第二階段 QC'},
-                        {colspan: 7, className: 'dev-3', title:'前端開發 - 第三階段'},
-                        {colspan: 2, className: 'dev-3', title:'第三階段 QC'},
-                        // {colspan: 1, className: 'blank'},
-                    ],
-                    [
-                    {colspan: 6, className: 'cloud-design', title:'雲端架構制定/廠商轉換'},
-                    {colspan: 3, className: 'cloud-design', title:'架構建置與測試'},
-                    {colspan: 3, className: 'blank'},
-
-                    {colspan: 3, className: 'deploy', title:'雲端部署'},
-                        // {colspan: 2, className: 'blank'},
-                    ],
-                ]
-            }
-        ];
-
-        function init(){
-
-
-        }
-
         $(function(){
 
             const versionElement = $('#version-selection');
@@ -191,11 +109,11 @@
     </script>
 </head>
 
-<body class="noto-sans-tc-a1 pt-28">
-    <div class="p-2 flex items-center fixed z-10 right-[1rem] bottom-[1rem] p-4 rounded-sm bg-zinc-900 opacity-10 hover:opacity-100 transition-opacity">
+<body class="noto-sans-tc-a1">
+    <div class="p-2 flex items-center fixed z-10 right-[1rem] bottom-[1rem] p-4 rounded-sm bg-zinc-900 opacity-0 hover:opacity-100 transition-opacity">
         <button id="btn-toggle">toggle all</button>
     </div>
-    <div class="header-row fixed top-0 left-0 z-10 w-100 flex flex-wrap sm:flex-nowrap justify-between ">
+    <div class="header-row w-100 flex flex-wrap sm:flex-nowrap justify-between ">
         <h1 class="archivo-black-regular ">SCHEDULE</h1>
 
         <div class="p-2 whitespace-nowrap">

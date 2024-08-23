@@ -16,7 +16,7 @@ body {
     padding: 0 ;
 
     color-scheme: dark;
-
+    user-select: none;
 }
 
 .noto-sans-tc-a1 {
@@ -26,15 +26,19 @@ body {
     font-style: normal;
 }
 
+/* 多筆的容器 */
 div#grids-container {
     padding: 2rem;
 }
+
+
 table.data-grid {
     width: 100%;
     border: var(--grid-border);
     border-collapse: collapse;
     margin-bottom: 2rem;
     background-color: var(--grid-bg);
+
 
     th, td {
         border: var(--grid-border);
@@ -95,12 +99,9 @@ table.data-grid {
                     transform: rotate(-90deg);
                 }
 
-                .collapsible + span.title {
-                    cursor: pointer;
-                }
-
                 .title-row {
                     user-select: none;
+                    cursor: pointer;
                 }
 
                 .task-list {
@@ -231,6 +232,57 @@ table.data-grid {
         transition: 100ms opacity ease-in-out;
         &:hover {
             opacity: 1;
+        }
+    }
+
+}
+
+
+.grid-wrapper {
+    user-select: none;
+    /* 單筆的容器 */
+    .grid-container {
+        max-height: 1000px;
+        opacity: 1;
+        transition-duration: 200ms;
+        transition-timing-function: ease-in-out;
+        transition-property: max-height, opacity;
+
+    }
+    .grid-collapsed-row {
+        cursor: pointer;
+        padding: 0.5rem 0;
+        user-select: none;
+    }
+    .collapsed-text {
+        opacity: 0;
+        border: 1px solid #999;
+        padding: 0 0.5rem;
+        transition: opacity 200ms ease-in-out;
+    }
+    .collapse-toggler {
+        user-select: none;
+        transform: rotate(0deg);
+        transition-duration: 200ms;
+        transition-timing-function: ease-in-out;
+        transition-property: transform;
+    }
+
+
+    &.collapsed {
+        .collapsed-text {
+            opacity: 0.5;
+        }
+        .collapse-toggler {
+            transform: rotate(-90deg);
+        }
+        .grid-container {
+            max-height: 0;
+            opacity: 0;
+        }
+
+        .data-grid {
+            display: none;
         }
     }
 
