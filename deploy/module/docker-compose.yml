@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./php:/var/www/html
+    depends_on:
+      - php-fpm
+      - nuxt
+    networks:
+      - internal
+
+  php-fpm:
+    build:
+      context: ./php
+      dockerfile: Dockerfile
+    volumes:
+      - ./php:/var/www/html
+    networks:
+      - internal
+
+  nuxt:
+    build:
+      context: ./nuxt
+      dockerfile: Dockerfile
+    volumes:
+      - ./nuxt:/app
+    networks:
+      - internal
+
+networks:
+  internal:
+
+volumes:
+  php-data:
+  nuxt-data:

@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  outer-nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx-outer.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - inner-nginx
+    networks:
+      - frontend
+      - backend
+
+  inner-nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx-inner.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - php-fpm
+      - nuxt
+    networks:
+      - backend
+
+  php-fpm:
+    build:
+      context: ./php
+      dockerfile: Dockerfile
+    volumes:
+      - ./php:/var/www/html
+    networks:
+      - backend
+
+  nuxt:
+    build:
+      context: ./nuxt
+      dockerfile: Dockerfile
+    volumes:
+      - ./nuxt:/app
+    networks:
+      - backend
+
+networks:
+  frontend:
+  backend:
+
+volumes:
+  ssl-certs:
