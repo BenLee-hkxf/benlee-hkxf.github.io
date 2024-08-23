@@ -63,11 +63,12 @@
             {"colspan": 8, "className": "blank"},
             {"colspan": 2, "className": "blank","title": "8/9 時程異動"},
             {"colspan": 6, "className": "dev-2", "title": "前端開發 - 第二階段", "tasks": [
-                {"title": "會員機制/社群登入"},
-                {"title": "第三方金流/財務串接"  },
-                {"title": "購物車/優惠券"},
-                {"title": "會員看課功能: 影像串接"},
-                {"title": "錯誤處理、流程完整性"}
+              {"title": "會員機制/社群登入"},
+              {"title": "第三方金流/財務串接"  },
+              {"title": "人員權限/角色"},
+              {"title": "購物車/優惠券"},
+              {"title": "會員看課功能: 影像串接"},
+              {"title": "錯誤處理、流程完整性"}
             ]}
         ],
         [
@@ -81,10 +82,12 @@
         ],
         [
             {"colspan": 12, "className": "blank"},
-            {"colspan": 3, "className": "cloud-design", "title": "雲端架構制定", "tasks":[
-                {"title": "放棄雲端機制轉換"},
-                {"title": "放棄 auto scaling 機制"},
-                {"title": ""}
+            {"colspan": 3, "className": "cloud-design", "title": "雲端架構", "tasks":[
+              {"title": "串流/轉檔機制轉換", "state": "canceled"},
+              {"title": "Auto scaling", "state": "canceled"},
+              {"title": "Load balancing"},
+              {"title": "DevOps 部署架構"},
+              {"title": "維運監控外包"}
             ]}
         ]
       ]
@@ -98,7 +101,9 @@
       ],
       "items": [
         [
-          {"colspan": 10, "className": "api", "title": "後端API開發/機制制定"}
+          {"colspan": 3, "className": "api", "title": "後端API開發/機制制定"},
+          {"colspan": 11, "className": "api", "title": "第三階段-後端API開發/機制制定"}
+
         ],
         [
           {"colspan": 3, "className": "ui-2" , "title": "UI設計 - 第二階段", "tasks":[

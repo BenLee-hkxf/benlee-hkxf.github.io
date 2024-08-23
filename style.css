@@ -54,6 +54,7 @@ table.data-grid {
     tr {
         th:first-child {
             /*transform: rotate(-90deg);*/
+            user-select: none;
             padding: .5rem 1rem;
             max-width: 3rem;
             background-color: var(--grid-row-header-bg);
@@ -124,6 +125,14 @@ table.data-grid {
                         user-select: none;
                         border-radius: 00.5rem;
                         padding: 0.2rem 1rem;
+
+                        &.canceled {
+                            text-decoration: line-through;
+                            opacity: 0.75;
+                            &:hover {
+                                opacity: 1;
+                            }
+                        }
 
                         transition-property: background-color, opacity;
                         transition-duration: 100ms;

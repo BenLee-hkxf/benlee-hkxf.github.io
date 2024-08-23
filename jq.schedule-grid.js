@@ -108,7 +108,7 @@ function createGridHtml(grid){
                 // <span class="material-symbols-outlined">add_circle</span>
                 // taskBlock.addClass('collapsible');
                 const taskList = $('<div class="task-list">').appendTo(taskBlock);
-                cell.tasks.map(task => $('<div>').text(task.title).appendTo(taskList));
+                cell.tasks.map(task => $('<div>').text(task.title).addClass(task.state).appendTo(taskList));
             }
             td.append(taskBlock);
             let colspan = +cell.colspan;
