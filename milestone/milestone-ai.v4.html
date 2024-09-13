@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Mind Map</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+    <style>
+        .node circle {
+            fill: #fff;
+            stroke: steelblue;
+            stroke-width: 1.5px;
+        }
+        .node text {
+            font: 10px sans-serif;
+        }
+        .link {
+            fill: none;
+            stroke: #ccc;
+            stroke-width: 1.5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="mind-map"></div>
+
+    <script>
+        // 設置畫布大小
+        const width = 960;
+        const height = 600;
+
+        // 創建SVG元素
+        const svg = d3.select("#mind-map").append("svg")
+            .attr("width", width)
+            .attr("height", height)
+            .call(d3.zoom().on("zoom", zoomed))
+            .append("g")
+            .attr("transform", `translate(${width / 2},${height / 2})`);
+
+        // 創建樹狀布局
+        const tree = d3.tree()
+            .size([2 * Math.PI, Math.min(width, height) / 2 - 100]);
+
+        // 縮放功能
+        function zoomed(event) {
+            svg.attr("transform", `translate(${width / 2},${height / 2}) scale(${event.transform.k})`);
+        }
+
+        // 載入JSON數據
+        d3.json("/data/product_development.json").then(function(data) {
+            const root = tree(d3.hierarchy(data));
+            
+            // 添加連線
+            const link = svg.selectAll(".link")
+                .data(root.links())
+                .join("path")
+                .attr("class", "link")
+                .attr("d", d3.linkRadial()
+                    .angle(d => d.x)
+                    .radius(d => d.y));
+
+            // 添加節點組
+            const node = svg.selectAll(".node")
+                .data(root.descendants())
+                .join("g")
+                .attr("class", "node")
+                .attr("transform", d => `translate(${project(d.x, d.y)})`);
+
+            // 添加節點圓圈
+            node.append("circle")
+                .attr("r", 4.5);
+
+            // 添加節點文本
+            node.append("text")
+                .attr("dy", "0.31em")
+                .attr("x", d => d.x < Math.PI === !d.children ? 6 : -6)
+                .attr("text-anchor", d => d.x < Math.PI === !d.children ? "start" : "end")
+                .text(d => d.data.name)
+                .clone(true).lower()
+                .attr("stroke", "white");
+
+            // 拖曳功能
+            node.call(d3.drag()
+                .on("start", dragstarted)
+                .on("drag", dragged)
+                .on("end", dragended));
+
+            function dragstarted(event, d) {
+                if (!event.active) simulation.alphaTarget(0.3).restart();
+                d.fx = d.x;
+                d.fy = d.y;
+            }
+
+            function dragged(event, d) {
+                const [x, y] = d3.pointer(event, svg.node());
+                const [dx, dy] = [x - width / 2, y - height / 2];
+                const angle = Math.atan2(dy, dx);
+                const radius = Math.sqrt(dx * dx + dy * dy);
+                d.fx = angle;
+                d.fy = radius;
+                updateNodePositions(d);
+            }
+
+            function dragended(event, d) {
+                if (!event.active) simulation.alphaTarget(0);
+                d.fx = null;
+                d.fy = null;
+            }
+
+            // 更新節點位置
+            function updateNodePositions(source) {
+                node.attr("transform", d => {
+                    if (isDescendant(source, d)) {
+                        d.x = d.fx || d.x;
+                        d.y = d.fy || d.y;
+                    }
+                    return `translate(${project(d.x, d.y)})`;
+                });
+
+                link.attr("d", d3.linkRadial()
+                    .angle(d => d.x)
+                    .radius(d => d.y));
+            }
+
+            // 檢查是否為子節點
+            function isDescendant(parent, child) {
+                if (parent === child) return true;
+                if (parent.children) {
+                    return parent.children.some(d => isDescendant(d, child));
+                }
+                return false;
+            }
+
+            // 將極坐標轉換為笛卡爾坐標
+            function project(x, y) {
+                const angle = (x - Math.PI / 2) / Math.PI * 180;
+                return [y * Math.cos(x), y * Math.sin(x)];
+            }
+
+            // 力導向模擬
+            const simulation = d3.forceSimulation(root.descendants())
+                .force("link", d3.forceLink(root.links()).id(d => d.id).distance(0).strength(1))
+                .force("charge", d3.forceManyBody().strength(-50))
+                .force("r", d3.forceRadial(d => d.y).strength(0.8))
+                .on("tick", () => {
+                    link.attr("d", d3.linkRadial()
+                        .angle(d => d.x)
+                        .radius(d => d.y));
+                    node.attr("transform", d => `translate(${project(d.x, d.y)})`);
+                });
+        });
+    </script>
+</body>
+</html>

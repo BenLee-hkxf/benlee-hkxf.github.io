@@ -1,0 +1,93 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+#mind-map-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+#mind-map {
+    width: 100%;
+    height: 100%;
+}
+
+.node {
+    circle {
+        position: relative;
+        fill: #fff;
+        stroke: steelblue;
+        stroke-width: 1.5px;
+    }
+    
+    text {
+        font: 12px sans-serif;
+    }
+
+    &.has-child {
+        circle {
+            stroke: rgba(100,0,0,1);
+        }
+        circle::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+
+            transform: translate(-50%, -50%);
+            
+            animation: expand 2s infinite;
+        }
+    }
+
+}
+
+
+
+@keyframes expand {
+    0% {
+        transform: scale(1);
+        stroke: rgba(100, 0, 0, 1);
+    }
+    100% {
+        transform: scale(2);
+        stroke: rgba(100, 0, 0, 0);
+    }
+}
+
+
+.link {
+    fill: none;
+    stroke: #ccc;
+    stroke-width: 1.5px;
+}
+
+#back-button {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    padding: 10px 20px;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+#back-button:hover:not(:disabled) {
+    background-color: #e0e0e0;
+}
+
+#back-button:disabled {
+    background-color: #d0d0d0;
+    color: #888;
+    cursor: not-allowed;
+}

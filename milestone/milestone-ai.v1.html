@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Mind Map</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+    <style>
+        .node {
+            cursor: pointer;
+        }
+        .node circle {
+            fill: #fff;
+            stroke: steelblue;
+            stroke-width: 1.5px;
+        }
+        .node text {
+            font: 10px sans-serif;
+        }
+        .link {
+            fill: none;
+            stroke: #ccc;
+            stroke-width: 1.5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="mind-map"></div>
+
+    <script>
+        // 設置畫布大小
+        const width = 960;
+        const height = 600;
+
+        // 創建SVG元素
+        const svg = d3.select("#mind-map").append("svg")
+            .attr("width", width)
+            .attr("height", height)
+            .append("g")
+            .attr("transform", "translate(40,0)");
+
+        // 創建樹狀布局
+        const tree = d3.tree().size([height, width - 160]);
+
+        // 載入JSON數據
+        d3.json("/data/product_development.json").then(function(data) {
+            const root = d3.hierarchy(data);
+            
+            // 計算節點位置
+            tree(root);
+
+            // 添加連線
+            const link = svg.selectAll(".link")
+                .data(root.descendants().slice(1))
+                .enter().append("path")
+                .attr("class", "link")
+                .attr("d", function(d) {
+                    return "M" + d.y + "," + d.x
+                        + "C" + (d.y + d.parent.y) / 2 + "," + d.x
+                        + " " + (d.y + d.parent.y) / 2 + "," + d.parent.x
+                        + " " + d.parent.y + "," + d.parent.x;
+                });
+
+            // 添加節點
+            const node = svg.selectAll(".node")
+                .data(root.descendants())
+                .enter().append("g")
+                .attr("class", "node")
+                .attr("transform", function(d) { 
+                    return "translate(" + d.y + "," + d.x + ")"; 
+                });
+
+            node.append("circle")
+                .attr("r", 4.5);
+
+            node.append("text")
+                .attr("dy", ".31em")
+                .attr("x", function(d) { return d.children ? -8 : 8; })
+                .style("text-anchor", function(d) { return d.children ? "end" : "start"; })
+                .text(function(d) { return d.data.name; });
+
+            // 添加拖曳功能
+            node.call(d3.drag()
+                .on("start", dragstarted)
+                .on("drag", dragged)
+                .on("end", dragended));
+
+            function dragstarted(event, d) {
+                d3.select(this).raise().classed("active", true);
+            }
+
+            function dragged(event, d) {
+                d3.select(this).attr("transform", "translate(" + (d.x = event.x) + "," + (d.y = event.y) + ")");
+            }
+
+            function dragended(event, d) {
+                d3.select(this).classed("active", false);
+            }
+        });
+    </script>
+</body>
+</html>
