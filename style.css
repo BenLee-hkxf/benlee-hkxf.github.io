@@ -10,6 +10,8 @@
 
     --grid-weekday-row-color: #acacac;
 }
+
+/* 重寫被 reset 的樣式 */
 body {
     background-color: #212223; 
     color: #c5c5c5;
@@ -19,6 +21,17 @@ body {
     user-select: none;
 }
 
+header {
+    h1,h2,h3,h4,h5,h6 { margin-bottom: 1rem; }
+    h1 { font-size: 3rem; }
+    h2 { font-size: 2.6rem; }
+    h3 { font-size: 2.2rem; }
+    h4 { font-size: 1.6rem; }
+    h5 { font-size: 1.2rem; }
+    h6 { font-size: 1rem; }    
+}
+
+/* 自訂樣式 */
 .noto-sans-tc-a1 {
     font-family: "Noto Sans TC", sans-serif;
     font-optical-sizing: auto;

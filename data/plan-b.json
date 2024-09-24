@@ -98,40 +98,18 @@
       "collapsed": false,
       "collapsedText":"9/23 ~ 1/3",
       "dates": [
-        {"year": 2024, "month": 4, "weekText": "4/22"}              ,
-        {"year": 2024, "month": 5, "weekText": ""}                  ,
-        {"year": 2024, "month": 6, "weekText": ""}                  ,
-        { "year": 2024, "month": 7, "weekIndexes": [0, 1, 2, 3, 4] },
-        { "year": 2024, "month": 8, "weekIndexes": [0, 1, 2, 3, 4] },
-        { "year": 2024, "month": 9, "weekIndexes": [0, 1, 2, 3, 4] },
+        { "year": 2024, "month": 9, "weekIndexes": [3, 4] },
         { "year": 2024, "month": 10, "weekIndexes": [0, 1, 2, 3, 4] },
         { "year": 2024, "month": 11, "weekIndexes": [0, 1, 2, 3   ] },
-        { "year": 2024, "month": 12, "weekIndexes": [0, 1, 2, 3, 4] }
+        { "year": 2024, "month": 12, "weekIndexes": [0, 1, 2, 3, 4] },
+        { "year": 2025, "month": 1, "weekIndexes": [0] }
       ],
       "items": [
         [
-          {"colspan": 18, "className": "api", "title": "後端API開發/機制制定"},
           {"colspan": 11, "className": "api", "title": "第三階段-後端API開發/機制制定"}
-
         ],
         [
-          {"colspan": 5, "className": "ui-1" , "title": "UI設計 - 第一階段", "tasks": [
-            {
-              "title": "基本架構:模組化/系統化",
-              "description": "main header、footer、categories、",
-              "tasks": [
-                {"title": "主頁"},
-                {"title": "探索課程"},
-                {"title": "課程商品頁"}
-              ]
-            },
-            {"title": "使用者體驗/行為分析/流程設計"},
-            {"title": "自適應/多平台"},
-            {"title": "基礎元件: 卡片、對話框、選單、工具列"}
-          ]},
-          {"colspan": 4, "className": "blank" },
-          {"colspan": 1, "className": "blank" , "title":"8/16","tooltip":"kick-off meeting" },
-          {"colspan": 8, "className": "ui-2" , "title": "UI設計 - 第二階段", "tasks":[
+          {"colspan": 3, "className": "ui-2" , "title": "UI設計 - 第二階段", "tasks":[
             {"title": "8/19 ~ 8/30 wireframe"},
             {"title": "9/2 ~ 9/13 UI 完稿"},
             {"title": "9/16 ~ 9/27 UI 定稿"  },
@@ -143,33 +121,7 @@
 
         ],
         [
-          {"colspan": 4, "className": "recruitment", "title": "前端招聘"},
-          {
-            "colspan": 5,
-            "className": "dev-1",
-            "title": "前端開發 - 第一階段",
-            "tasks": [
-              {
-                "title": "前端技術架構 VUE",
-                "description": "main header、footer、categories、",
-                "tasks": [
-                  {"title": "主頁"},
-                  {"title": "探索課程"},
-                  {"title": "課程商品頁"}
-                ]
-              },
-              {"title": "基本路由實現/多國語系"},
-              {"title":"NUXT SSR"},
-              {"title": "UI設計實現"}
-            ]
-          },
-          {"colspan": 2, "className": "dev-1", "title": "第一階段 QC"},
-          {"colspan": 4, "className": "blank"}
-        ],
-        [
-            {"colspan": 8, "className": "blank"},
-            {"colspan": 1, "className": "blank","title": "8/9 時程異動"},
-            {"colspan": 8, "className": "dev-2", "title": "前端開發 - 第二階段", "tasks": [
+            {"colspan": 3, "className": "dev-2", "title": "前端開發 - 第二階段", "tasks": [
               {"title": "會員機制/社群登入"},
               {"title": "第三方金流/財務串接"  },
               {"title": "人員權限/角色"},
@@ -191,16 +143,15 @@
             {"colspan": 2, "className": "dev-3", "title": "第三階段 QC"    }
         ],
         [
-          {"colspan": 8, "className": "blank"},
           {"colspan": 6, "className": "course-update", "title": "資料轉換(修正平台轉換問題)", "tasks":[
             {"title":"第一階段: 檢查"},
             {"title":"第二階段: 截圖"},
-            {"title":"第三階段: 編輯/審核"}
+            {"title":"第三階段: 編輯/審核"},
+            {"title":"第四階段: 公告"}
           ]},
           {"colspan": 15, "className": "blank"}
         ],
         [
-            {"colspan": 12, "className": "blank"},
             {"colspan": 3, "className": "cloud-design", "title": "雲端架構", "tasks":[
               {"title": "串流/轉檔機制轉換", "state": "canceled"},
               {"title": "Auto scaling", "state": "canceled"},
@@ -208,11 +159,9 @@
               {"title": "DevOps 部署架構"},
               {"title": "維運監控外包"}
             ]},
-            {"colspan": 2, "className": "cloud-design", "title": "雲端架構"},
             {"colspan": 2, "className": "cloud-design", "title": "建置與測試"    },
   
-            {"colspan": 3, "className": "deploy"      , "title": "雲端部署"       },
-            {"colspan": 3, "className": "blank"                               }
+            {"colspan": 3, "className": "deploy"      , "title": "雲端部署"       }
 
         ]
       ]
