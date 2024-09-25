@@ -154,12 +154,14 @@ function createGridHtml(grid) {
 
       // colWeeks 可能值: [8, 17, 21] 代表第8、第17、第21個 cell，分別有 colspan 屬性。
       colWeeks.forEach((colWeek) => {
-        
-  
+          
         // if (cellStep <= colWeek && colWeek < cellStep + cell.colspan) {
            // 此項目前做的事情，是在未碰撞時正常+1，碰撞時略過
         //   colspan++;
         // }
+
+        // 目前狀況，第一個成功過了，第二個算錯位置
+        // 預期要在第8、17、21個 cell 位置，分別+1
 
         if (cellStep <= (colWeek) && (colWeek) <= (cellStep + cell.colspan)) {
           colspan++;
