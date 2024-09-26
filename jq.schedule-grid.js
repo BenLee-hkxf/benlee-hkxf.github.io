@@ -55,19 +55,28 @@ function createGridHtml(grid) {
   weekdayRow.append("<th>日期</th>");
 
   let lastWeek = {};
-  const colWeeks = [];
+  // 用來存放日期列內，要跨周的周次，譬如 [8, 17, 21] 代表第8、第17、第21個 cell，分別有 colspan 屬性。
+  const colWeeks = []; 
+  // 用來累計 cell 的位置，以便判斷是否有跨周
   let weekCount = 0;
 
   grid.dates.forEach((date, di) => {
     if (typeof date.weekText !== "undefined") {
+      // 有指定周間文字 weekText 者，依照指定顯示
       const weekdayTh = $("<th >" + date.weekText + "</th>").appendTo(
         weekdayRow
       );
+      // 文字型態只顯示一欄，所以周次加一即可
       weekCount++;
     } else {
+      // 沒指定周間文字 weekText 者，自動顯示各週日期起訖
+      // weekIndexes:
+      // [0,1,2] 前三周
+      // [4,5] 第五、六周 
       date.weekIndexes.forEach((weekIndex, wi) => {
         // 根據 date.year、date.month、weekIndex 取出當月該週的開始日、結束日資訊
         const week = getWeekRange(date.year, date.month, weekIndex);
+
         if (week.starts === lastWeek.starts && week.ends === lastWeek.ends) {
           colWeeks.push(weekCount);
           return;
@@ -99,6 +108,7 @@ function createGridHtml(grid) {
     const tr = $("<tr>").appendTo(tbody);
     tr.append($("<th>項目</th>"));
 
+    // 累計 cell 的位置，以便判斷是否有跨周
     let cellStep = 0;
 
     row.forEach((cell, i) => {
@@ -131,10 +141,29 @@ function createGridHtml(grid) {
       }
 
       let colspan = +cell.colspan;
-      // 有 bug，跨月的第一週的 colspan 會強制 +1，但其實強制+1應該寫在前一個月的最後一週
 
+
+      console.log( i, 'colWeeks',colWeeks)
+
+      // 利用 colWeeks 來判斷是否有跨周
+
+      // 有 bug，跨月的第一週的 colspan 會強制 +1，但其實強制+1應該寫在前一個月的最後一週
+      // cell.colspan : 8 1 8
+      // 目前呈現 td colspan 是 8 2 8
+      // 希望應該要 9 1 8      
+
+      // colWeeks 可能值: [8, 17, 21] 代表第8、第17、第21個 cell，分別有 colspan 屬性。
       colWeeks.forEach((colWeek) => {
-        if (cellStep <= colWeek && colWeek < cellStep + cell.colspan) {
+          
+        // if (cellStep <= colWeek && colWeek < cellStep + cell.colspan) {
+           // 此項目前做的事情，是在未碰撞時正常+1，碰撞時略過
+        //   colspan++;
+        // }
+
+        // 目前狀況，第一個成功過了，第二個算錯位置
+        // 預期要在第8、17、21個 cell 位置，分別+1
+
+        if (cellStep <= (colWeek) && (colWeek) <= (cellStep + cell.colspan)) {
           colspan++;
         }
       });
