@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Use Case - Classroom</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        .archivo-black-regular {
+            font-family: "Archivo Black", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+    </style>
+</head>
+<body >
+  <div class="mx-auto w-100 sm:max-w-[800px] md:max-w-[1024px]">
+    <header>
+        <h1 class="archivo-black-regular ">Use Case - 上課區</h1>
+    </header>
+
+    <div class="tabs">
+        <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
+            <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="default-tab" data-tabs-toggle="#default-tab-content" role="tablist">
+                <li class="me-2" role="presentation">
+                    <button class="inline-block p-4 border-b-2 rounded-t-lg" 
+                    id="bulletin-tab" data-tabs-target="#bulletin" type="button" role="tab" 
+                    aria-controls="bulletin" aria-selected="false">公告</button>
+                </li>
+                <li class="me-2" role="presentation">
+                    <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" 
+                    id="homework-tab" data-tabs-target="#homework" type="button" role="tab" 
+                    aria-controls="homework" aria-selected="false">作業</button>
+                </li>
+                <li class="me-2" role="presentation">
+                    <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" 
+                    id="introduction-tab" data-tabs-target="#introduction" type="button" role="tab" 
+                    aria-controls="introduction" aria-selected="false">介紹</button>
+                </li>
+            </ul>
+        </div>
+        <div id="default-tab-content">
+            <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="bulletin" role="tabpanel" aria-labelledby="bulletin-tab">
+                <img src="./images/0000.PNG" alt="公告">
+            </div>
+            <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="bulletin" role="tabpanel" aria-labelledby="bulletin-tab">
+                <img src="./images/0000.PNG" alt="作業">
+            </div>
+            <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="introduction" role="tabpanel" aria-labelledby="introduction-tab">
+                <img src="./images/0000.PNG" alt="介紹">
+            </div>
+        </div>
+
+    </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+
+</body>
+</html>

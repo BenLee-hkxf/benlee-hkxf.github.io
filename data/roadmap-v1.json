@@ -1,0 +1,64 @@
+{"title":"YOTTa 系統", "children":[
+    {"title":"會員機制", "children": [
+        {"title":"註冊", "checked": true, "children": []},
+        {"title":"忘記密碼重設", "children": []},
+        {"title":"登入", "children": [
+            {"title":"單一登入(登出其他設備)", "checked": false, "children": []},
+            {"title":"二階段驗證(信件認證碼)", "checked": false, "children": []},
+            {"title":"變更個人資料", "children": [
+                {"title":"換照片", "checked": true, "children": []},
+                {"title":"暱稱, 姓名, 性別, 生日, 地址", "checked": true, "children": []},
+                {"title":"變更信箱", "children": []}
+            ]}
+        ]}
+    ]},
+    {"title":"購物", "children": [
+        {"title":"購物車", "children": [
+            {"title":"精簡版", "checked": true, "children": []}
+        ]},
+        {"title":"折價券", "children": [
+            {"title":"全站式", "checked": true, "children": []},
+            {"title":"再行銷活動", "checked": true, "children": []},
+            {"title":"指定課程", "checked": true, "children": []},
+            {"title":"合購", "checked": true, "children": []}
+        ]},
+        {"title":"結帳", "children": [
+            {"title":"付款方式", "children": [
+                {"title":"信用卡", "checked": true, "children": []},
+                {"title":"LINE Pay", "checked": true, "children": []},
+                {"title":"ATM 轉帳", "checked": true, "children": []},
+                {"title":"超商付款", "checked": true, "children": []}
+            ]},
+            {"title":"發票選項", "children": [
+                {"title":"個人發票", "checked": true, "children": [
+                    {"title":"電子信箱", "checked": true, "children": []},
+                    {"title":"手機條碼", "checked": true, "children": []},
+                    {"title":"自然人憑證", "checked": true, "children": []}
+                ]},
+                {"title":"公司發票", "checked": true, "children": [
+                    {"title":"公司統編, 公司抬頭", "checked": true, "children": []}
+                ]},
+                {"title":"捐贈發票", "checked": true, "children": [
+                    {"title":"捐贈單位", "checked": true, "children": []}
+                ]}
+            ]}
+            
+        ]}
+
+    ]},
+    {"title":"個人頁面", "children": [
+        {"title":"我的訂單", "children": []},
+        {"title":"我的資料", "children": []},
+        {"title":"我的課程", "children": []},
+        {"title":"信件通知", "children": []}
+    ]},
+    {"title":"上課", "children": [
+        {"title":"播放影片", "children": []},
+        {"title":"筆記", "children": []},
+        {"title":"作業", "children": []},
+        {"title":"測驗", "children": []}
+    ]}
+    
+
+]}
+
