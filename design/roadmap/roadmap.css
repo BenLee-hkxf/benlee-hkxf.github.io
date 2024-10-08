@@ -1,8 +1,8 @@
 :root {
     /* 為了要做 RGBA 的 alpha 變換，必須提供純數字形式的 rgb 值。用法: rgba(var(--hover-bg-rgb), 0.1) */
     --hover-bg-rgb: 128,128,128;
-    --completed: #6c6;
-    --partial: #c69;
+    --completed: rgb(132,204,22);
+    --partial: rgb(229,208,86);
     --incompleted: #999;
 }
 
@@ -40,6 +40,14 @@ input:not(:checked) + span {
 
 
 }
+.node-act-btn {
+    display: none;
+}
+.editor-mode {
+    .node-act-btn {
+        display: block;
+    }
+}
 
 .json-container {
     textarea.dark {
@@ -65,7 +73,7 @@ input:not(:checked) + span {
             margin: 0.25rem 0;
             padding: 0.25rem 0;
             &:hover {
-               background-color: rgba(var(--hover-bg-rgb), 0.1);
+               background-color: rgba(var(--hover-bg-rgb), 0.05);
             }
 
             .node {
@@ -91,7 +99,7 @@ input:not(:checked) + span {
                 transition-timing-function: ease-in-out;
                 transition-property: max-height, opacity;        
             }
-            .node-act-btn {
+            .node-btn {
                 padding: 0 0.5rem;
             }
             .collapse-toggler {
@@ -115,5 +123,11 @@ input:not(:checked) + span {
                 }
             }
         }
+    }
+}
+
+#edit-modal {
+    input.node-path {
+
     }
 }
