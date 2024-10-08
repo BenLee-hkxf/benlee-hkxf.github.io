@@ -34,8 +34,8 @@ function renderTree(){
     const ul = $('<ul>').appendTo(container);
     recursiveRenderNode(nodeStat,'').appendTo(ul);
 
-    const jsonArea = $('.json-container textarea');
-    jsonArea.text(JSON.stringify(nodeStat))
+    // const jsonArea = $('.json-container textarea');
+    // jsonArea.text(JSON.stringify(nodeStat))
 
     initFlowbite();
 }
@@ -109,11 +109,21 @@ function renderNode(node) {
 }
 
 function saveTree(){
+
     localStorage.setItem('roadmap', JSON.stringify(nodeStat));
     renderTree();
 }
 
-
+function loopRemovePath(node){
+    delete node.path;
+    if (node.children && node.children.length > 0){
+        node.children.forEach((child) => {
+            loopRemovePath(child);
+        });
+    } else {
+        delete node.children;
+    }
+}
 
 function loopFindNode(node, path){
     if (node.path == path){
@@ -221,7 +231,11 @@ function loopChildrenStatus(node){
         delete node.children;
         loopDetermineParentChecked(node);
     } else {
-        node.children.forEach((child) => {
+        node.children.forEach((child, i) => {
+            // 存檔時，path 會全部拿掉，初始化時，重新加回
+            if (!child.path){
+                child.path = [node.path, i].join('.');
+            }
             if (child.path){
                 parentTree[child.path] = node;
             }
@@ -233,27 +247,34 @@ function loopChildrenStatus(node){
 }
 
 
-    // node-checked
-    // 異動之後，都要整個dom tree砍掉重新長，以免事件互相影響
-    $(document).on('change', 'input[type=checkbox].node-checked', function(){
-        const cb = $(this);
-        const node = loopFindNode(nodeStat, cb.attr('data-path'));
-        const checked = cb.prop('checked');
-        // console.log('checked changed', node.title, checked);
-        node.cb = checked?1:0;
+// node-checked
+// 異動之後，都要整個dom tree砍掉重新長，以免事件互相影響
+$(document).on('change', 'input[type=checkbox].node-checked', function(){
+    const cb = $(this);
+    const node = loopFindNode(nodeStat, cb.attr('data-path'));
+    const checked = cb.prop('checked');
+    // console.log('checked changed', node.title, checked);
+    node.cb = checked?1:0;
 
-        loopApplyChecked(node, checked);
-        loopDetermineParentChecked(node);
+    loopApplyChecked(node, checked);
+    loopDetermineParentChecked(node);
 
-        saveTree();
-    });
+    saveTree();
+});
 
+$(document).on('click', '.btn-export-json', function(){
+    const obj = JSON.parse(JSON.stringify(nodeStat));
+    loopRemovePath(obj);
+    const jsonArea = $('.json-container textarea');
+    jsonArea.text(JSON.stringify(obj))
+
+});
 
 $(document).on('focus', 'input.node-name', function(){
     $(this).select();
 });
 
-$(document).on('click', '.editor-save-button', function(){
+$(document).on('click', '.editor-save-button', function(e){
     const path = $('.node-path').val();
     const title = $('.node-name').val();
     
@@ -262,6 +283,12 @@ $(document).on('click', '.editor-save-button', function(){
 
     saveTree();
     $('.node-path').val('');
+
+    // const modal = FlowbiteInstances.getInstance('Modal','edit-modal');
+    // if (modal){
+    //     modal.hide()
+    // }
+    // e.preventDefault();
 });
 
 $(document).on('click', '.node-act-edit', function(){

@@ -4,6 +4,7 @@
     --completed: rgb(132,204,22);
     --partial: rgb(229,208,86);
     --incompleted: #999;
+    --folded: #c93;
 }
 
 
@@ -85,7 +86,7 @@ input:not(:checked) + span {
                     display: flex;
                     align-items: center;
                     /* gap: 0.5rem; */
-                    
+                    cursor: pointer;
                 }
 
 
@@ -93,7 +94,7 @@ input:not(:checked) + span {
             }
 
             ul.children {
-                max-height: 1000px;
+                max-height: 10000px;
                 opacity: 1;
                 transition-duration: 200ms;
                 transition-timing-function: ease-in-out;
@@ -111,6 +112,7 @@ input:not(:checked) + span {
                 }
                 .collapse-toggler {
                     transform: rotate(-90deg);
+                    color: var(--folded);
                 }
                 ul.children {
                     pointer-events: none;
