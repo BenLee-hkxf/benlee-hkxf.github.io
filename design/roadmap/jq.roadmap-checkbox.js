@@ -1,13 +1,29 @@
 
 let nodeStat = {};
+const parentTree = {};
+
+const cbStatus = ['none', 'all', 'some'];
+// nodeStat[cb] => 0: none, 1: all, 2: some
 
 // 手動勾選 checkbox 會觸發兩個方向的遞迴更新，往下 children 與往上 parent
 // 但是初始狀態沒有，所以要手動執行一次
 
 function cacheAndRender(jsonNode) {
-    nodeStat = jsonNode;
+    // check localStorage
 
-    initCheckBothStatus(nodeStat)
+    const cache = localStorage.getItem('roadmap');
+    if (cache){
+        if (confirm('found cached data, load it?')){
+            jsonNode = JSON.parse(cache);            
+        } else {
+            // localStorage.removeItem('roadmap');
+            localStorage.setItem('roadmap', JSON.stringify(jsonNode));
+        }
+    }else{
+        localStorage.setItem('roadmap', JSON.stringify(jsonNode));
+    }
+    nodeStat = initTree(jsonNode);
+   
     console.log('nodeStat', nodeStat);
     renderTree()
 }
@@ -18,19 +34,27 @@ function renderTree(){
     const ul = $('<ul>').appendTo(container);
     recursiveRenderNode(nodeStat,'').appendTo(ul);
 
+    const jsonContainer = $('.json-container').empty();
 
-    $('<textarea class="dark" rows="20" cols="50">').text(JSON.stringify(nodeStat)).appendTo(wrapper);
+    $('<textarea class="dark w-full" rows="20" >').text(JSON.stringify(nodeStat)).appendTo(jsonContainer);
 }
+
 
 // 輸出 ul > li
 function recursiveRenderNode(node, path){
+
+    // 因為 parent 屬性會造成自我參照，改用獨立路徑物件 parentTree 來找 parent
    
     node.path = path;
     const li = renderNode(node);
     if (node.children){
         const ul = $('<ul class="children">').appendTo(li);
         node.children.map((child, i) => {
-            child.parent = node;
+            //child.parent = node;
+            if (child.path){
+                parentTree[child.path] = node;
+            }
+           
             recursiveRenderNode(child, `${path}.${i}`).appendTo(ul);
         });
     }
@@ -47,25 +71,6 @@ function renderNode(node) {
 
     createCollapseButton(node, li).appendTo(el);
 
-    // // const toggler = $('<button>').text('toggle').appendTo(el);
-    // const gridCollapsed = $(
-    //     '<div class="grid-collapsed-row flex gap-1 items-center">'
-    //   ).appendTo(el);
-
-    // const toggler = $(
-    //     '<span class="collapse-toggler cursor-pointer material-symbols-outlined"></span>'
-    //   );
-    
-    // if (node.children && node.children.length > 0){
-    //     toggler.appendTo(gridCollapsed);
-    //     toggler.text("expand_circle_down");
-    // }
-    
-    // gridCollapsed.on("click", function () {
-    //     // node parent li
-    //     el.parent().toggleClass("collapsed");
-    //     // el.toggleClass("collapsed");
-    // });
 
     const cb = $('<input type="checkbox">').attr('name', node.path).appendTo(label);
 
@@ -77,28 +82,17 @@ function renderNode(node) {
 
     if (node.children && node.children.length > 0){
 
-        // indeterminate
-        // const both = loopDetermineBoth(node.children);
-        // const both = node.children.some((child) => child.checked) && node.children.some((child) => !child.checked);
-        // console.log('node', node.title, both);
 
-
-        if (node.both){
+        // nodeStat[cb] => 0: none, 1: all, 2: some
+        if (node.cb == 2){
             cb.prop('indeterminate', true);
-            node.checked = false;
         } else {
-            const allChecked = node.children.every((child) => child.checked);
-            cb.prop('checked', allChecked);
-            // 如果是 true，把勾選狀態存起來
-            if (allChecked){
-                node.checked = true;
-            } else {
-                node.checked = false;
-            }
+            cb.prop('checked', node.cb == 1);
         }
-    }else{
-        cb.prop('checked', node.checked)
 
+    }else{
+        // cb.prop('checked', node.checked)
+        cb.prop('checked', node.cb == 1)
     }
 
 
@@ -108,27 +102,46 @@ function renderNode(node) {
     // 異動之後，都要整個dom tree砍掉重新長，以免事件互相影響
     cb.on('change', function(){
         const checked = cb.prop('checked');
+        console.log('checked changed', node.title, checked);
+        // const some = cb.prop('indeterminate');
 
-        // (
+        // node.checked = checked;
+        // node.cb = cb.prop('indeterminate')?2: cb.prop('checked')==1;
+        node.cb = checked?1:0;
 
-        if (node.children && node.children.length > 0){
-            loopCheckAllChildren(node, checked);
-        } else {
-            node.checked = checked;
-            loopCheckAllParent(node);
-        }
+        loopCheckAllChildren(node, checked);
+        loopCheckAllParent(node);
 
-        // if (node.parent){
-        //     const parent = node.parent;
-        //     parent.checked = parent.children.every((child) => child.checked);
-        //     // $(`input`, parent.el).prop('checked', parent.checked);
-        // }
-        renderTree();
+        saveTree();
     });
 
     return li;
 }
 
+function saveTree(){
+    localStorage.setItem('roadmap', JSON.stringify(nodeStat));
+    renderTree();
+}
+
+
+
+function loopFindNode(node, path){
+    if (node.path == path){
+        return node;
+    } else if (node.children){
+        for (let i = 0; i < node.children.length; i++){
+            const child = node.children[i];
+            const found = loopFindNode(child, path);
+            if (found){
+                return found;
+            }
+        }
+        // return node.children.map((child) => loopFindNode(child, path));
+    }
+    return null;
+}
+
+$('.editor-cancel-button').on('click', function(){});
 
 function createCollapseButton(node, li){
     
@@ -137,16 +150,39 @@ function createCollapseButton(node, li){
         '<div class="grid-collapsed-row flex gap-1 items-center">'
       );
 
+    const editButton = $(
+        '<span class="text-blue-500 opacity-10 hover:opacity-100 transition-opacity cursor-pointer node-act-btn node-act-edit material-symbols-outlined">edit</span>'
+    ).attr({
+        'data-path': node.path,
+        'data-modal-target':'edit-modal', 
+        'data-modal-toggle':'edit-modal'
+    }).appendTo(gridCollapsed);
+
+    //  data-modal-target="default-modal" data-modal-toggle="default-modal"
+    
+    const addButton = $(
+        '<span class="text-lime-500 opacity-10 hover:opacity-100 transition-opacity cursor-pointer node-act-btn node-act-add material-symbols-outlined">add_circle</span>'
+      ).attr('data-path', node.path).appendTo(gridCollapsed);
+
+    const removeButton = $(
+        '<span class="text-rose-500 opacity-10 hover:opacity-100 transition-opacity cursor-pointer node-act-btn node-act-remove material-symbols-outlined">cancel</span>'
+      ).attr('data-path', node.path).appendTo(gridCollapsed);
+
+
+
     const toggler = $(
-        '<span class="collapse-toggler cursor-pointer material-symbols-outlined"></span>'
+        '<span class="collapse-toggler node-act-btn cursor-pointer material-symbols-outlined"></span>'
       );
     
     if (node.children && node.children.length > 0){
         toggler.appendTo(gridCollapsed);
         toggler.text("expand_circle_down");
+    }else{
+        // add empty placeholder
+        $('<span class="w-[40px] node-act-btn material-symbols-outlined">').appendTo(gridCollapsed);
     }
     
-    gridCollapsed.on("click", function () {
+    toggler.on("click", function () {
         // node parent li
         li.toggleClass("collapsed");
         node.collapsed = !node.collapsed;
@@ -156,60 +192,129 @@ function createCollapseButton(node, li){
     return gridCollapsed;
 }
 
-function loopDetermineBoth(children){
-    children.forEach((child) => {
-        child._checked = child.children && child.children.length>0?loopDetermineBoth(child.children): child.checked;
-    });
-    return children.some((child) => child._checked) && children.some((child) => !child._checked);
 
-}
 function loopCheckAllChildren(node, checked){
     if (node.children ){
         node.children.forEach((child) => {
-            child.checked = checked;
+            // child.checked = checked;
+            // delete child.both;
+            child.cb = checked?1:0;
             loopCheckAllChildren(child, checked);
         });
     }
 }
+
+
+
 function loopCheckAllParent(node){
-    
-    if (node.parent){
-        node.parent.checked = node.parent.children.every((child) => child.checked);
-        loopCheckAllParent(node.parent);
+
+    if (parentTree[node.path]){
+        const parent = parentTree[node.path];
+        const children = parent.children;
+        // parent.checked = children.every((child) => child.checked);
+        // parent.both = children && children.length>0? children.some((child) => child.checked) && children.some((child) => !child.checked) : false;
+        parent.cb = children.every((child) => child.cb==1)?1: children.some((child) => child.cb != 0) ? 2 : 0;
+        loopCheckAllParent(parent);
     }
 }
 
+// 首次 render 之前，先把每一層級的 node 預先設定好 both 值
+function initTree(node){
 
-function initCheckBothStatus(node){
-    // 把每一層級的 node 預先設定好 both 值
-    // 如果有 children，往下遞迴檢查每一個 child 的 checked 狀態是否相同。如果不同，設定 both 為 true
-    // 如果沒有 children，both 為 false
-
-
-    
-
-}
+    // 由上而下，調整 both 與 checked 狀態
+    loopChildrenStatus(node);
 
 
-function checkBothStatus(children){
-    children.forEach((child) => {
-        child.both = checkBothStatus(child.children);
+        
+    $('.editor-save-button').on('click', function(){
+        const path = $('.node-path').val();
+        const title = $('.node-name').val();
+        
+        const node = loopFindNode(nodeStat, path);
+        node.title = title;
+
+        saveTree();
+        $('.node-path').val('');
     });
 
-    return children.some((child) => child.checked) && children.some((child) => !child.checked);
+    return node;
+}
+
+function loopChildrenStatus(node){
+
+    if (!node.children || node.children.length == 0){
+        delete node.children;
+        loopCheckAllParent(node);
+    } else {
+        node.children.forEach((child) => {
+
+            loopChildrenStatus(child);
+        });
+    }
 
 }
 
+$(document).on('click', '.node-act-edit', function(){
+    let modal = document.getElementById('edit-modal');
+    // modal.style.display = 'block';
 
-// function loopCheckStatus(children){
-//     children.forEach((child) => {
-//         child._checked = child.children && child.children.length>0?loopCheckStatus(child.children): child.checked;
-//     });
-//     return children.some((child) => child._checked) && children.some((child) => !child._checked);
+    const path = $(this).attr('data-path');
+    const node = loopFindNode(nodeStat, path);
 
-// }
+    $('.node-path').val(node.path);
+    $('.node-name').val(node.title);
+});
 
-// function getBoth(){
+$(document).on('click', '.node-act-add', function(){
+    const path = $(this).attr('data-path');
 
-// }
+    const targetNode = loopFindNode(nodeStat, path);
 
+
+
+    const newNode = {
+        title: 'node '+ Math.ceil(Math.random()*100000000),
+        cb: 0,
+        children: []
+    };
+    if (targetNode.children){
+        targetNode.children.push(newNode);
+    } else {
+        targetNode.children = [newNode];
+    }
+
+    newNode.path = path + '.' + targetNode.children.length;
+    parentTree[newNode.path] = targetNode;
+    loopCheckAllParent(newNode);
+    saveTree();
+});
+
+$(document).on('click', '.node-act-remove', function(){  
+    const path = $(this).attr('data-path');
+    
+
+    const found = loopFindNode(nodeStat, path);
+    if (found){
+        const parent = parentTree[found.path];
+
+        if (parent){
+            const foundParent = loopFindNode(nodeStat, parent.path);
+            if(foundParent){
+                foundParent.children = foundParent.children.filter((child) => child.path !== path);
+
+                // delete parentTree[path];
+
+                // 移除之後，要從 sibling 角度查一次，更新 parent 的狀態
+                if (foundParent.children.length > 0){
+                    loopCheckAllParent(foundParent.children[0]);
+                }else{
+                    loopCheckAllParent(parent);
+                }
+
+                saveTree();
+            }
+        }
+    }
+
+    //parentTree[node.path].children = parentTree[node.path].children.filter((child) => child !== node);
+  });

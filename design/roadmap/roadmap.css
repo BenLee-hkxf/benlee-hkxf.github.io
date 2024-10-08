@@ -38,11 +38,17 @@ input:not(:checked) + span {
 #roadmap-wrapper {
     display: flex;
 
+
+}
+
+.json-container {
     textarea.dark {
+        padding: 0.5rem;
+        font-family: monospace;
+        font-size: small; 
         color-scheme: dark;
         background-color: #333;
     }
-    
 }
 
 .roadmap-container {
@@ -67,6 +73,7 @@ input:not(:checked) + span {
                 justify-content: space-between;
                 gap: 1.5rem;
                 label {
+                    white-space: nowrap;
                     display: flex;
                     align-items: center;
                     /* gap: 0.5rem; */
@@ -84,8 +91,10 @@ input:not(:checked) + span {
                 transition-timing-function: ease-in-out;
                 transition-property: max-height, opacity;        
             }
-            .collapse-toggler {
+            .node-act-btn {
                 padding: 0 0.5rem;
+            }
+            .collapse-toggler {
                 transition: 200ms transform ease-in-out;
             }
             &.collapsed {
