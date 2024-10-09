@@ -73,9 +73,9 @@ input:not(:checked) + span {
         li {
             margin: 0.25rem 0;
             padding: 0.25rem 0;
-            &:hover {
+            /* &:hover {
                background-color: rgba(var(--hover-bg-rgb), 0.05);
-            }
+            } */
 
             .node {
                 display: flex;
@@ -133,3 +133,32 @@ input:not(:checked) + span {
 
     }
 }
+
+
+@media screen and (max-width:500px) { 
+
+    .roadmap-container {
+        max-width: 100vw;
+        input[type='checkbox'] {
+            margin: 0 1rem;
+        }
+        ul {
+            /* 手機橫向空間小，所以減少縮排 */
+            margin-left: 0.5rem;
+            li {
+                &:hover {
+                    background-color: transparent;
+                 }
+                .node {
+                    padding: 0.25rem 0;
+                    label {
+                        span {
+                            font-size: 1.25rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+  }
