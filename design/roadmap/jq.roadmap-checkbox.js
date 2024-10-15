@@ -324,6 +324,61 @@ $(document).on('click', '.node-act-add', function(){
     saveTree();
 });
 
+$(document).on('click', '.btn-change-order', function(){
+    const dir = $(this).attr('data-dir');
+    const path = $('input[name=node-path]').val();
+    const parent = parentTree[path];
+    const currentIndex = parseInt(path.split('.').pop(), 10);
+    const total = parent.children.length;
+    let a = -1; b = -1;
+    if (dir == 'up' && currentIndex > 0){
+        a = currentIndex - 1;
+        b = currentIndex;
+    } else if (dir == 'down' && currentIndex < total-1){
+        a = currentIndex;
+        b = currentIndex+1;
+    }
+    if (a>=0&&b>=0){
+        const temp = parent.children[a];
+        parent.children[a] = parent.children[b];
+        parent.children[b] = temp;
+        saveTree();
+        
+        const modal = FlowbiteInstances.getInstance('Modal','edit-modal');
+        if (modal){
+            modal.hide()
+        }
+    }
+    
+});
+$(document).on('click', '.btn-apply-move', function(){
+    const path = $('input[name=node-path]').val();
+    const target = $('input[name=move-path]').val();
+
+    const node = loopFindNode(nodeStat, path);
+    // const nodeIndex = parseInt(path.split('.').pop(), 10);
+    const oldParent = parentTree[path];
+    const newParent = loopFindNode(nodeStat, target);
+   
+    oldParent.children = oldParent.children.filter((child) => child.path !== path);
+    newParent.children.push(node);
+
+    const newPath = [...newParent.path.split('.'), newParent.children.length-1].join('.');
+    node.path = newPath;
+    delete parentTree[path];
+    parentTree[newPath] = newParent;
+    // parentTree[path] = newParent;
+
+    saveTree();
+    
+
+
+    const modal = FlowbiteInstances.getInstance('Modal','edit-modal');
+    if (modal){
+        modal.hide()
+    }
+});
+
 $(document).on('click', '.node-act-remove', function(){  
     const path = $(this).attr('data-path');
     
