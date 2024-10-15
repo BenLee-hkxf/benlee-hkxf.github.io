@@ -12,13 +12,15 @@
         { "year": 2024, "month": 9, "weekIndexes": [0, 1, 2, 3, 4] },
         { "year": 2024, "month": 10, "weekIndexes": [0, 1, 2, 3, 4] },
         { "year": 2024, "month": 11, "weekIndexes": [0, 1, 2, 3   ] },
-        { "year": 2024, "month": 12, "weekIndexes": [0, 1, 2, 3, 4] }
+        { "year": 2024, "month": 12, "weekIndexes": [0, 1, 2, 3, 4] },
+        { "year": 2025, "month": 1, "weekIndexes": [0, 1, 2, 3, 4] },
+        { "year": 2025, "month": 2, "weekIndexes": [0, 1, 2, 3, 4] }
       ],
       "items": [
         [
           {"colspan": 18, "className": "api", "title": "後端API開發/機制制定"},
-          {"colspan": 11, "className": "api", "title": "第三階段-後端API開發/機制制定"}
-
+          {"colspan": 12, "className": "api", "title": "第三階段-後端API開發/機制制定"},
+          {"colspan": 10, "className": "blank"}
         ],
         [
           {"colspan": 5, "className": "ui-1" , "title": "UI設計 - 第一階段", "tasks": [
@@ -37,14 +39,14 @@
           ]},
           {"colspan": 4, "className": "blank" },
           {"colspan": 1, "className": "blank" , "title":"8/16","tooltip":"kick-off meeting" },
-          {"colspan": 8, "className": "ui-2" , "title": "UI設計 - 第二階段", "tasks":[
+          {"colspan": 9, "className": "ui-2" , "title": "UI設計 - 第二階段", "tasks":[
             {"title": "8/19 ~ 8/30 wireframe"},
             {"title": "9/2 ~ 9/13 UI 完稿"},
             {"title": "9/16 ~ 9/27 UI 定稿"  },
             {"title": "9/16 ~ 9/27 UI 定稿"  },
             {"title": "9/30 ~ 10/11 交付期"  }
           ]},
-          {"colspan": 2, "className": "blank" },
+          {"colspan": 2, "className": "", "title":"合約簽訂" },
           {"colspan": 9, "className": "ui-3 not-sure", "title": "UI設計 - 第三階段"     }
 
         ],
@@ -70,12 +72,12 @@
             ]
           },
           {"colspan": 2, "className": "dev-1", "title": "第一階段 QC"},
-          {"colspan": 4, "className": "blank"}
+          {"colspan": 26, "className": "blank"}
         ],
         [
             {"colspan": 8, "className": "blank"},
             {"colspan": 2, "className": "blank","title": "8/9 時程異動"},
-            {"colspan": 8, "className": "dev-2", "title": "前端開發 - 第二階段", "tasks": [
+            {"colspan": 9, "className": "dev-2", "title": "前端開發 - 第二階段", "tasks": [
               {"title": "會員機制/社群登入"},
               {"title": "第三方金流/財務串接"  },
               {"title": "人員權限/角色"},
@@ -83,17 +85,18 @@
               {"title": "會員看課功能: 影像串接"},
               {"title": "錯誤處理、流程完整性"}
             ]},
-            {"colspan": 2, "className": "dev-2", "title": "第二階段 QC",   "tasks":[
+            {"colspan": 3, "className": "dev-2", "title": "第二階段 QC",   "tasks":[
               {"title":"功能正確性" },
               {"title":"業務流程支援" },
               {"title":"使用者體驗" }
             ] },
-            {"colspan": 7, "className": "dev-3", "title": "前端開發 - 第三階段", "tasks": [
+            {"colspan": 9, "className": "dev-3", "title": "前端開發 - 第三階段", "tasks": [
                 {"title": "功能補齊"},
                 {"title": "系統後台"},
                 {"title": "行銷增強"  },
                 {"title": "社群增強"}
             ]},
+            {"colspan": 1, "className": "blank", "title": "春節", "tasks":[{"title": "1/25 ~ 2/2"}]    },
             {"colspan": 2, "className": "dev-3", "title": "第三階段 QC"    }
         ],
         [
@@ -103,21 +106,24 @@
             {"title":"第二階段: 截圖"},
             {"title":"第三階段: 編輯/審核"}
           ]},
-          {"colspan": 15, "className": "blank"}
+          {"colspan": 22, "className": "blank"}
         ],
         [
             {"colspan": 12, "className": "blank"},
-            {"colspan": 3, "className": "cloud-design", "title": "雲端架構", "tasks":[
+            {"colspan": 6, "className": "cloud-design", "title": "雲端架構", "tasks":[
               {"title": "串流/轉檔機制轉換", "state": "canceled"},
               {"title": "Auto scaling", "state": "canceled"},
               {"title": "Load balancing"},
               {"title": "DevOps 部署架構"},
               {"title": "維運監控外包"}
             ]},
-            {"colspan": 2, "className": "cloud-design", "title": "建置與測試"    },
+            {"colspan": 2, "className": "blank", "title": "NextLink 報價/合約","tasks":[
+              {"title": "建置專案"}, {"title": "維護合約"}
+            ]    },
+            {"colspan": 5, "className": "cloud-design", "title": "建置與測試"    },
   
             {"colspan": 3, "className": "deploy"      , "title": "雲端部署"       },
-            {"colspan": 3, "className": "blank"                               }
+            {"colspan": 8, "className": "blank"                               }
 
         ]
       ]
