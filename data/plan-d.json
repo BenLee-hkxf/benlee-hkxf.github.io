@@ -11,7 +11,7 @@
         { "year": 2024, "month": 8, "weekIndexes": [0, 1, 2, 3, 4] },
         { "year": 2024, "month": 9, "weekIndexes": [0, 1, 2, 3, 4] },
         { "year": 2024, "month": 10, "weekIndexes": [0, 1, 2, 3, 4] },
-        { "year": 2024, "month": 11, "weekIndexes": [0, 1, 2, 3   ] },
+        { "year": 2024, "month": 11, "weekIndexes": [0, 1, 2, 3, 4] },
         { "year": 2024, "month": 12, "weekIndexes": [0, 1, 2, 3, 4] },
         { "year": 2025, "month": 1, "weekIndexes": [0, 1, 2, 3, 4] },
         { "year": 2025, "month": 2, "weekIndexes": [0, 1, 2, 3, 4] }
@@ -39,7 +39,7 @@
           ]},
           {"colspan": 4, "className": "blank" },
           {"colspan": 1, "className": "blank" , "title":"8/16","tooltip":"kick-off meeting" },
-          {"colspan": 8, "className": "ui-2" , "title": "UI設計 - 第二階段", "tasks":[
+          {"colspan": 9, "className": "ui-2" , "title": "UI設計 - 第二階段", "tasks":[
             {"title": "8/19 ~ 8/30 wireframe"},
             {"title": "9/2 ~ 9/13 UI 完稿"},
             {"title": "9/16 ~ 9/27 UI 定稿"  },
@@ -77,7 +77,7 @@
         [
             {"colspan": 8, "className": "blank"},
             {"colspan": 2, "className": "blank","title": "8/9 時程異動"},
-            {"colspan": 9, "className": "dev-2", "title": "前端開發 - 第二階段", "tasks": [
+            {"colspan": 10, "className": "dev-2", "title": "前端開發 - 第二階段", "tasks": [
               {"title": "會員機制/社群登入"},
               {"title": "第三方金流/財務串接"  },
               {"title": "人員權限/角色"},

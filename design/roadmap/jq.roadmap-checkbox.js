@@ -214,6 +214,7 @@ function loopDetermineParentChecked(node){
     }
 }
 
+const dropdownNodes = [];
 
 function initTree(node){
     const jsonContainer = $('.json-container').empty();
@@ -229,6 +230,7 @@ function loopChildrenStatus(node){
 
     if (!node.children || node.children.length == 0){
         delete node.children;
+        // 每一次走到底，往上更新所有父節點狀態
         loopDetermineParentChecked(node);
     } else {
         node.children.forEach((child, i) => {
