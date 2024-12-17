@@ -14,13 +14,14 @@
         { "year": 2024, "month": 11, "weekIndexes": [0, 1, 2, 3, 4] },
         { "year": 2024, "month": 12, "weekIndexes": [0, 1, 2, 3, 4] },
         { "year": 2025, "month": 1, "weekIndexes": [0, 1, 2, 3, 4] },
-        { "year": 2025, "month": 2, "weekIndexes": [0, 1, 2, 3, 4] }
+        { "year": 2025, "month": 2, "weekIndexes": [0, 1, 2, 3] },
+        { "year": 2025, "month": 3, "weekIndexes": [0, 1, 2, 3, 4] }
       ],
       "items": [
         [
           {"colspan": 18, "className": "api", "title": "後端API開發/機制制定"},
           {"colspan": 12, "className": "api", "title": "第三階段-後端API開發/機制制定"},
-          {"colspan": 10, "className": "blank"}
+          {"colspan": 15, "className": "blank"}
         ],
         [
           {"colspan": 5, "className": "ui-1" , "title": "UI設計 - 第一階段", "tasks": [
@@ -47,8 +48,8 @@
             {"title": "9/30 ~ 10/11 交付期"  }
           ]},
           {"colspan": 2, "className": "", "title":"合約簽訂" },
-          {"colspan": 9, "className": "ui-3 not-sure", "title": "UI設計 - 第三階段"     }
-
+          {"colspan": 9, "className": "ui-3 not-sure", "title": "UI設計 - 第三階段"     },
+          {"colspan": 15, "className": "blank"}
         ],
         [
           {"colspan": 4, "className": "recruitment", "title": "前端招聘"},
@@ -72,7 +73,7 @@
             ]
           },
           {"colspan": 2, "className": "dev-1", "title": "第一階段 QC"},
-          {"colspan": 26, "className": "blank"}
+          {"colspan": 40, "className": "blank"}
         ],
         [
             {"colspan": 8, "className": "blank"},
@@ -90,22 +91,44 @@
               {"title":"業務流程支援" },
               {"title":"使用者體驗" }
             ] },
-            {"colspan": 1, "className": "blank", "title":"公告上線"},
-            {"colspan": 2, "className": "dev-2", "title":"持續改善"},
-            {"colspan": 15, "className": "blank"}
+            {"colspan": 1, "className": "blank", "title":"公告上線", "tasks":[{"title":"雙十一正式公開"}]    },
+            {"colspan": 20, "className": "blank"}
         ],
         [
+          {"colspan": 27, "className": "blank"},
+          {"colspan": 5, "className": "ui-3", "title": "UI設計 - (定案)第三階段", "tasks":[
+            {"title": "12/11 確認續約，開始安排人力"},
+            {"title": "1218 起始會議，討論範圍"}
+          ]},
+          {"colspan": 1, "className": "blank", "title": "春節", "tasks":[{"title": "1/25 ~ 2/2"}] },
+          {"colspan": 3, "className": "ui-3", "title": "UI設計 - (定案)第三階段", "tasks":[
+           
+          ]},
+          {"colspan": 10, "className": "blank"}
+        ],
+
+        [
           {"colspan": 22, "className": "blank"},
-          {"colspan": 9, "className": "dev-3", "title": "前端開發 - 第三階段", "tasks": [
+          {"colspan": 3, "className": "dev-3", "title": "前端開發 - 第三階段", "tasks": [
+            {"title": "問題回報修正"},
+            {"title": "內部詳細測試"},
+            {"title": "上課區功能補齊: 作業、教材"}
+          ]},
+          {"colspan": 2, "className": "dev-3", "title": "前端開發 - 第三階段", "tasks": [
+            {"title": "預先設計: 模擬登入、Rich Editor"},
+            {"title": "後台功能盤點分析"},
+            {"title": "功能改善討論: refresh_token、markdown"}
+          ]},
+          {"colspan": 5, "className": "dev-3", "title": "前端開發 - 第三階段", "tasks": [
             {"title": "功能補齊"},
             {"title": "系統後台"},
-            {"title": "行銷增強"  },
+            {"title": "行銷增強"},
             {"title": "社群增強"}
           ]},
           {"colspan": 1, "className": "blank", "title": "春節", "tasks":[{"title": "1/25 ~ 2/2"}]    },
         
           {"colspan": 3, "className": "dev-3", "title": "第三階段 QC"    },
-          {"colspan": 1, "className": "blank"}
+          {"colspan": 10, "className": "blank"}
         ],
         [
           {"colspan": 8, "className": "blank"},
@@ -113,6 +136,13 @@
             {"title":"第一階段: 檢查"},
             {"title":"第二階段: 截圖"},
             {"title":"第三階段: 編輯/審核"}
+          ]},
+          {"colspan": 19, "className": "blank"},
+          {"colspan": 3, "className": "course-update", "title": "資料轉換", "tasks":[
+            {"title":"課程內容"},
+            {"title":"公告"},
+            {"title":"作業、教材"},
+            {"title":"活動"}
           ]},
           {"colspan": 23, "className": "blank"}
         ],
